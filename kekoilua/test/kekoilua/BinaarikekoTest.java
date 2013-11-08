@@ -1,46 +1,29 @@
-
 package kekoilua;
 
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class BinaarikekoTest {
-    
-    public BinaarikekoTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+
+    public Binaarikeko keko;
+    public ArrayList<Integer> semikeko;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        keko = new Binaarikeko();
+        semikeko = new ArrayList<>();
     }
 
-    /**
-     * Test of MaxHeapify method, of class Binaarikeko.
-     */
+
     @Test
     public void testMaxHeapify() {
         System.out.println("MaxHeapify");
         int i = 0;
         ArrayList<Integer> kek = null;
         Binaarikeko instance = new Binaarikeko();
-        instance.MaxHeapify(i, kek);
+        instance.MaxHeapify(i);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -49,13 +32,19 @@ public class BinaarikekoTest {
      * Test of MaxInsert method, of class Binaarikeko.
      */
     @Test
-    public void testMaxInsert() {
+    public void MaxInsertToimiiKunKekoOnTyhja() {
         System.out.println("MaxInsert");
-        int alkio = 0;
-        Binaarikeko instance = new Binaarikeko();
-        instance.MaxInsert(alkio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int alkio = 4;
+        keko.MaxInsert(alkio);
+        assertEquals(4, keko.getYlin());
+    }
+    
+    @Test
+    public void MaxInsertToimiiKunKekoEiOleTyhja(){
+        keko.MaxInsert(1);
+        keko.MaxInsert(3);
+        keko.MaxInsert(5);
+        assertEquals(5, keko.getYlin());
     }
 
     /**
