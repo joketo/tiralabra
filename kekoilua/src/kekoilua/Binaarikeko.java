@@ -15,17 +15,14 @@ public class Binaarikeko {
         int vasen = 2 * i;
         int oikea = 2 * i + 1;
         int suurin = i;
-        if (vasen <= keko.size() || keko.get(vasen) > keko.get(suurin)) {
+        if (vasen <= keko.size() && keko.get(vasen) > keko.get(suurin)) {
             suurin = vasen;
         }
-        if (oikea <= keko.size() || keko.get(oikea) > keko.get(suurin)) {
+        if (oikea <= keko.size() && keko.get(oikea) > keko.get(suurin)) {
             suurin = oikea;
         }
         if (suurin != i) {
             VaihdaArvotKeskenaan(suurin, i);
-            //int talteen = keko.get(suurin); //vaihdetaan suurin ja i keskenään
-            //keko.add(suurin, keko.get(i));
-            //keko.add(i, talteen);
             MaxHeapify(suurin);
         }
 
@@ -39,10 +36,20 @@ public class Binaarikeko {
 
     public void MaxInsert(int alkio) {
         keko.add(alkio);
-        while (keko.get(((keko.size()) - 1) / 2) < alkio) { //vanhemman kuuluisi olla lasta suurempi
-            VaihdaArvotKeskenaan(((keko.size() - 1) / 2), alkio);
-            //vaihdetaan arvot vanhemman kanssa päittäin
+        if(keko.size() == 1){
+            return;
         }
+        int vanhemmanIndeksi = (keko.size()-2) /2;
+        int alkionIndeksi = keko.size()-1;
+        while (keko.get(vanhemmanIndeksi) < alkio && vanhemmanIndeksi >= 0) { //vanhemman kuuluisi olla lasta suurempi
+            VaihdaArvotKeskenaan(vanhemmanIndeksi, alkionIndeksi);
+            alkionIndeksi = vanhemmanIndeksi;
+            vanhemmanIndeksi = (vanhemmanIndeksi-1)/2;
+            
+        }
+    }
+    public int getYlin(){
+        return keko.get(0);
     }
 
     public void MaxDelete(int alkio) {
