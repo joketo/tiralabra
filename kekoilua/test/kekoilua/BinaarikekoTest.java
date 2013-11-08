@@ -13,32 +13,18 @@ public class BinaarikekoTest {
     @Before
     public void setUp() {
         keko = new Binaarikeko();
-        semikeko = new ArrayList<>();
     }
 
 
     @Test
-    public void testMaxHeapify() {
-        int i = 0;
-        ArrayList<Integer> kek = null;
-        Binaarikeko instance = new Binaarikeko();
-        instance.Heapify(i);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of Insert method, of class Binaarikeko.
-     */
-    @Test
-    public void MaxInsertToimiiKunKekoOnTyhja() {
+    public void InsertToimiiKunKekoOnTyhja() {
         int alkio = 4;
         keko.Insert(alkio);
         assertEquals(4, keko.getYlin());
     }
     
     @Test
-    public void MaxInsertToimiiKunKekoEiOleTyhja(){
+    public void InsertToimiiKunKekoEiOleTyhja(){
         keko.Insert(1);
         keko.Insert(3);
         keko.Insert(5);
@@ -49,25 +35,32 @@ public class BinaarikekoTest {
      * Test of Delete method, of class Binaarikeko.
      */
     @Test
-    public void MaxDeleteToimiiKunKekoOnTyhja() {
+    public void DeleteToimiiKunKekoOnTyhja() {
         keko.Delete();
         assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
     }
     
     @Test
-    public void MaxDeleteToimiiKunKeossaYksiAlkio(){
+    public void DeleteToimiiKunKeossaYksiAlkio(){
         keko.Insert(1);
         keko.Delete();
         assertEquals(-1, keko.getYlin());
     }
     
     @Test
-    public void MaxDeleteToimiiKunKeossaNeljaAlkiota(){
+    public void DeleteToimiiKunKeossaNeljaAlkiota(){
         keko.Insert(4);
         keko.Insert(3);
         keko.Insert(2);
         keko.Insert(1);
         keko.Delete();
         assertEquals(3, keko.getYlin());
+    }
+    
+    @Test
+    public void GetYlinToimii(){
+        keko.Insert(3);
+        keko.Insert(5);
+        assertEquals(5, keko.getYlin());
     }
 }
