@@ -10,28 +10,34 @@ public class Binaarikeko {
     public Binaarikeko() {
         keko = new ArrayList<>();
     }
-
-    public void MaxHeapify(int i) { //huom, muuta indeksoinnit oikein, aloitetaan 0:sta
-        int vasen = 2 * i;
-        int oikea = 2 * i + 1;
-        int suurin = i;
-        if (vasen <= keko.size() && keko.get(vasen) > keko.get(suurin)) {
-            suurin = vasen;
+    private void Tulosta(){ //testailua varten
+        for(int i : keko){
+            System.out.print(i);
         }
-        if (oikea <= keko.size() && keko.get(oikea) > keko.get(suurin)) {
-            suurin = oikea;
+        System.out.println();
+    }
+
+    public void MaxHeapify(int i) {
+        int vasenI = (2 * i) +1;
+        int oikeaI = (2 * i) +2;
+        int suurin = i;
+
+        if (vasenI < keko.size() && keko.get(vasenI) > keko.get(suurin)) {
+            suurin = vasenI;
+        }
+        if (oikeaI < keko.size() && keko.get(oikeaI) > keko.get(suurin)) {
+            suurin = oikeaI;
         }
         if (suurin != i) {
             VaihdaArvotKeskenaan(suurin, i);
             MaxHeapify(suurin);
         }
-
     }
 
     private void VaihdaArvotKeskenaan(int a, int b) {
         int talteen = keko.get(a);
-        keko.add(a, keko.get(b));
-        keko.add(b, talteen);
+        keko.set(a, keko.get(b));
+        keko.set(b, talteen);
     }
 
     public void MaxInsert(int alkio) {
@@ -64,8 +70,8 @@ public class Binaarikeko {
             return;
         }
         VaihdaArvotKeskenaan(0, (keko.size()-1));
-        keko.remove(keko.size()-1); //huippu nyt viimeisenä
-        MaxHeapify(keko.get(0));
+        keko.remove(keko.size()-1); //huippu nyt viimeisenä, poistetaan
+        MaxHeapify(0);
         
     }
 }

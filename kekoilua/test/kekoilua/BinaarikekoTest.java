@@ -19,7 +19,6 @@ public class BinaarikekoTest {
 
     @Test
     public void testMaxHeapify() {
-        System.out.println("MaxHeapify");
         int i = 0;
         ArrayList<Integer> kek = null;
         Binaarikeko instance = new Binaarikeko();
@@ -33,7 +32,6 @@ public class BinaarikekoTest {
      */
     @Test
     public void MaxInsertToimiiKunKekoOnTyhja() {
-        System.out.println("MaxInsert");
         int alkio = 4;
         keko.MaxInsert(alkio);
         assertEquals(4, keko.getYlin());
@@ -52,8 +50,24 @@ public class BinaarikekoTest {
      */
     @Test
     public void MaxDeleteToimiiKunKekoOnTyhja() {
-        System.out.println("MaxDelete");
         keko.MaxDelete();
         assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
+    }
+    
+    @Test
+    public void MaxDeleteToimiiKunKeossaYksiAlkio(){
+        keko.MaxInsert(1);
+        keko.MaxDelete();
+        assertEquals(-1, keko.getYlin());
+    }
+    
+    @Test
+    public void MaxDeleteToimiiKunKeossaNeljaAlkiota(){
+        keko.MaxInsert(4);
+        keko.MaxInsert(3);
+        keko.MaxInsert(2);
+        keko.MaxInsert(1);
+        keko.MaxDelete();
+        assertEquals(3, keko.getYlin());
     }
 }
