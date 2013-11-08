@@ -16,7 +16,7 @@ public class Binaarikeko implements Keko{
         System.out.println();
     }
 
-    public void Heapify(int i) {
+    private void Heapify(int i) {
         int vasenI = (2 * i) +1;
         int oikeaI = (2 * i) +2;
         int suurin = i;
