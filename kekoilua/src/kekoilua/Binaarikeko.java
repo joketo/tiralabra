@@ -2,10 +2,9 @@ package kekoilua;
 
 import java.util.ArrayList;
 
-public class Binaarikeko {
+public class Binaarikeko implements Keko{
 
     ArrayList<Integer> keko;
-    int heapsize;
 
     public Binaarikeko() {
         keko = new ArrayList<>();
@@ -17,7 +16,7 @@ public class Binaarikeko {
         System.out.println();
     }
 
-    public void MaxHeapify(int i) {
+    public void Heapify(int i) {
         int vasenI = (2 * i) +1;
         int oikeaI = (2 * i) +2;
         int suurin = i;
@@ -30,7 +29,7 @@ public class Binaarikeko {
         }
         if (suurin != i) {
             VaihdaArvotKeskenaan(suurin, i);
-            MaxHeapify(suurin);
+            Heapify(suurin);
         }
     }
 
@@ -40,7 +39,8 @@ public class Binaarikeko {
         keko.set(b, talteen);
     }
 
-    public void MaxInsert(int alkio) {
+    @Override
+    public void Insert(int alkio) {
         keko.add(alkio);
         if(keko.size() == 1){
             return;
@@ -54,6 +54,7 @@ public class Binaarikeko {
             
         }
     }
+    @Override
     public int getYlin(){
         if(keko.isEmpty()){
             return -1;
@@ -61,7 +62,8 @@ public class Binaarikeko {
         return keko.get(0);
     }
 
-    public void MaxDelete() { //poistaa keon huipun
+    @Override
+    public void Delete() { //poistaa keon huipun
         if(keko.isEmpty()){
             return;
         }
@@ -71,7 +73,7 @@ public class Binaarikeko {
         }
         VaihdaArvotKeskenaan(0, (keko.size()-1));
         keko.remove(keko.size()-1); //huippu nyt viimeisenä, poistetaan
-        MaxHeapify(0);
+        Heapify(0);
         
     }
 }

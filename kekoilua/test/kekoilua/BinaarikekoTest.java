@@ -22,52 +22,52 @@ public class BinaarikekoTest {
         int i = 0;
         ArrayList<Integer> kek = null;
         Binaarikeko instance = new Binaarikeko();
-        instance.MaxHeapify(i);
+        instance.Heapify(i);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of MaxInsert method, of class Binaarikeko.
+     * Test of Insert method, of class Binaarikeko.
      */
     @Test
     public void MaxInsertToimiiKunKekoOnTyhja() {
         int alkio = 4;
-        keko.MaxInsert(alkio);
+        keko.Insert(alkio);
         assertEquals(4, keko.getYlin());
     }
     
     @Test
     public void MaxInsertToimiiKunKekoEiOleTyhja(){
-        keko.MaxInsert(1);
-        keko.MaxInsert(3);
-        keko.MaxInsert(5);
+        keko.Insert(1);
+        keko.Insert(3);
+        keko.Insert(5);
         assertEquals(5, keko.getYlin());
     }
 
     /**
-     * Test of MaxDelete method, of class Binaarikeko.
+     * Test of Delete method, of class Binaarikeko.
      */
     @Test
     public void MaxDeleteToimiiKunKekoOnTyhja() {
-        keko.MaxDelete();
+        keko.Delete();
         assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
     }
     
     @Test
     public void MaxDeleteToimiiKunKeossaYksiAlkio(){
-        keko.MaxInsert(1);
-        keko.MaxDelete();
+        keko.Insert(1);
+        keko.Delete();
         assertEquals(-1, keko.getYlin());
     }
     
     @Test
     public void MaxDeleteToimiiKunKeossaNeljaAlkiota(){
-        keko.MaxInsert(4);
-        keko.MaxInsert(3);
-        keko.MaxInsert(2);
-        keko.MaxInsert(1);
-        keko.MaxDelete();
+        keko.Insert(4);
+        keko.Insert(3);
+        keko.Insert(2);
+        keko.Insert(1);
+        keko.Delete();
         assertEquals(3, keko.getYlin());
     }
 }
