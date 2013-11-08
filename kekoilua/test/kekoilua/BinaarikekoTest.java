@@ -51,12 +51,9 @@ public class BinaarikekoTest {
      * Test of MaxDelete method, of class Binaarikeko.
      */
     @Test
-    public void testMaxDelete() {
+    public void MaxDeleteToimiiKunKekoOnTyhja() {
         System.out.println("MaxDelete");
-        int alkio = 0;
-        Binaarikeko instance = new Binaarikeko();
-        instance.MaxDelete(alkio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keko.MaxDelete();
+        assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
     }
 }
