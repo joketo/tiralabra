@@ -1,6 +1,8 @@
 package kekoilua;
 
 public class Binomikeko implements Keko {
+    
+    //kaikki täällä on rikki, älkää katsoko tänne!
 
     private Node juuri;
     private Binomikeko(){

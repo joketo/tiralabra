@@ -3,6 +3,7 @@ package kekoilua;
 
 import java.util.ArrayList;
 
+//kaikki täällä on rikki, älkää katsoko tänne!
 
 public class Node {
     
