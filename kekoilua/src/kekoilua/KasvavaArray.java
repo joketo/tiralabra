@@ -1,13 +1,16 @@
 package kekoilua;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class KasvavaArray<T> {
 
     T[] lista;
 
-    public KasvavaArray() {
-        lista = new T[100];
+    public KasvavaArray(Class<T> c) {
+        @SuppressWarnings("unchecked")
+        final T[] a = (T[]) Array.newInstance(c, 100);
+        lista = a;
     }
 
     public void add(T alkio) {
