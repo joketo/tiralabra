@@ -6,8 +6,8 @@ public class KasvavaArray<T> {
 
     T[] lista;
 
-    public KasvavaArray(T tyyppi) {
-        lista = new tyyppi[100];
+    public KasvavaArray() {
+        lista = new T[100];
     }
 
     public void add(T alkio) {
@@ -31,12 +31,12 @@ public class KasvavaArray<T> {
     }
 
     public int length() {
-        int summa = 0;
+        int pituus = 0;
         for (int i = 0; i < lista.length; i++) {
             if (lista[i] != null) {
-                summa++;
+                pituus++;
             }
         }
-        return summa;
+        return pituus;
     }
 }
