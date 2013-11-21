@@ -11,12 +11,19 @@ import static org.junit.Assert.*;
 
 public class KasvavaArrayTest {
     
-    KasvavaArray ar;
+    KasvavaArray<Integer> ar;
     @Before
     public void setUp() {
-        ar = new KasvavaArray();
+        ar = new KasvavaArray<>();
     }
     
+    
+    
+    @Test
+    public void testContainsToimiiKunYksiAlkio(){
+        ar.add(3);
+        assertEquals(true, ar.contains(3));
+    }
     /**
      * Test of add method, of class KasvavaArray.
      */
@@ -38,7 +45,7 @@ public class KasvavaArrayTest {
         System.out.println("delete");
         Object alkio = null;
         KasvavaArray instance = null;
-        instance.delete(alkio);
+        instance.remove(alkio);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -51,7 +58,7 @@ public class KasvavaArrayTest {
         System.out.println("length");
         KasvavaArray instance = null;
         int expResult = 0;
-        int result = instance.length();
+        int result = instance.size();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

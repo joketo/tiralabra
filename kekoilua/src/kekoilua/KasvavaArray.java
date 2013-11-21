@@ -9,34 +9,21 @@ import java.util.ListIterator;
 
 public class KasvavaArray<T> implements List {
 
-    int viimeinen;
+    int viimeisenIndeksi;
     T[] lista;
     Class<T> cc;
 
-    public KasvavaArray(Class<T> c) {
+    public KasvavaArray() {
         @SuppressWarnings("unchecked")
-        T[] a = (T[]) Array.newInstance(c, 100);
-        cc = c;
+        T[] a = (T[]) Array.newInstance(cc, 100);
         lista = a;
+        viimeisenIndeksi = -1;
     }
 
-    public void delete(T alkio) {
-        @SuppressWarnings("unchecked")
-        T[] kopio = Arrays.copyOf(lista, lista.length * 2);
-        for (int j = 0; j <= lista.length; j++) {
-            for (int i = 0; i < lista.length; i++) {
-                if (lista[i] == alkio) {
-                    j++; //ei kopioida kopioon tätä
-                }
-                kopio[i] = lista[j];
-            }
-        }
-        this.lista = kopio;
-    }
-
-    public int length() {
+    @Override
+    public int size() {
         int pituus = 0;
-        for (int i = 0; i < lista.length; i++) {
+        for (int i = 0; i <= lista.length; i++) {
             if (lista[i] != null) {
                 pituus++;
             }
@@ -45,52 +32,50 @@ public class KasvavaArray<T> implements List {
     }
 
     @Override
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (lista[0] == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object[] toArray(Object[] ts) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i = 0; i < lista.length; i++){
+            if(lista[i] == (T)o){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean add(Object o) {
-        if (viimeinen == lista.length - 1) {
-            @SuppressWarnings("unchecked")
+        if (viimeisenIndeksi == lista.length - 1) {
             T[] kopio = Arrays.copyOf(lista, lista.length * 2);
             kopio[kopio.length] = (T) o;
             this.lista = kopio;
         } else {
-            lista[viimeinen + 1] = (T) o;
-            viimeinen = viimeinen + 1;
+            lista[viimeisenIndeksi + 1] = (T) o;
+            viimeisenIndeksi = viimeisenIndeksi + 1;
         }
         return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T[] kopio = Arrays.copyOf(lista, lista.length * 2);
+        for (int j = 0; j <= lista.length; j++) {
+            for (int i = 0; i < lista.length; i++) {
+                if (lista[i] == (T) o) {
+                    j++; //ei kopioida kopioon tätä
+                }
+                kopio[i] = lista[j];
+            }
+        }
+        this.lista = kopio;
+        return true;
     }
 
     @Override
@@ -165,6 +150,21 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public List subList(int i, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+        @Override
+    public Iterator iterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object[] toArray() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object[] toArray(Object[] ts) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
