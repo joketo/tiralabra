@@ -10,14 +10,17 @@ import java.util.ListIterator;
 public class KasvavaArray<T> implements List {
 
     int viimeisenIndeksi;
-    T[] lista;
-    Class<T> cc;
+    private Object[] lista;
 
     public KasvavaArray() {
-        @SuppressWarnings("unchecked")
-        T[] a = (T[]) Array.newInstance(cc, 100);
-        lista = a;
+        lista = new Object[100];
         viimeisenIndeksi = -1;
+    }
+    
+    private T getT(int i) {
+        @SuppressWarnings("unchecked")
+        final T t = (T) lista[i];
+        return t;
     }
 
     @Override
@@ -53,11 +56,11 @@ public class KasvavaArray<T> implements List {
     @Override
     public boolean add(Object o) {
         if (viimeisenIndeksi == lista.length - 1) {
-            T[] kopio = Arrays.copyOf(lista, lista.length * 2);
-            kopio[kopio.length] = (T) o;
+            Object[] kopio = Arrays.copyOf(lista, lista.length * 2);
+            kopio[kopio.length] = o;
             this.lista = kopio;
         } else {
-            lista[viimeisenIndeksi + 1] = (T) o;
+            lista[viimeisenIndeksi + 1] = o;
             viimeisenIndeksi = viimeisenIndeksi + 1;
         }
         return true;
@@ -65,7 +68,7 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public boolean remove(Object o) {
-        T[] kopio = Arrays.copyOf(lista, lista.length * 2);
+        Object[] kopio = Arrays.copyOf(lista, lista.length * 2);
         for (int j = 0; j <= lista.length; j++) {
             for (int i = 0; i < lista.length; i++) {
                 if (lista[i] == (T) o) {
