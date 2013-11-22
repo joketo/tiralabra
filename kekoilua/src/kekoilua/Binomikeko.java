@@ -2,8 +2,40 @@ package kekoilua;
 
 public class Binomikeko implements Keko {
     
-    //kaikki täällä on rikki, älkää katsoko tänne!
+    public Binomikeko(){
+        
+    }
 
+    @Override
+    public void Delete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Insert(int a) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getYlin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //kaikki täällä on rikki, älkää katsoko tänne!
+/*
     private Node juuri;
     private Binomikeko(){
         this.juuri = null;
@@ -28,7 +60,7 @@ public class Binomikeko implements Keko {
          * 
          * 
          */
-        
+       /* 
     }
     
     private Node addSubTree(Node eka, Node toka){
@@ -57,7 +89,7 @@ public class Binomikeko implements Keko {
          heap.removeTree(min)
          merge(heap, tmp)
          */
-    }
+  /*  }
 
     @Override
     public void Insert(int a) {
@@ -70,4 +102,6 @@ public class Binomikeko implements Keko {
     public int getYlin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+*/
 }

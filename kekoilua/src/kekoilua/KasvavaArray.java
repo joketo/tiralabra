@@ -25,7 +25,6 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public int size() {
-
         return viimeisenIndeksi + 1;
     }
 
@@ -76,12 +75,27 @@ public class KasvavaArray<T> implements List {
         }
         viimeisenIndeksi--;
         lista = kopio;
-        return k;
+        return getT(k);
+    }
+    
+    @Override
+    public Object get(int i) {
+        return getT(i);
     }
     
     public String toString(){
         Object[] subarray = Arrays.copyOfRange(lista, 0, viimeisenIndeksi+1);
         return Arrays.toString(subarray);
+    }
+    
+     @Override
+    public int indexOf(Object o) {
+        for(int i = 0; i <= viimeisenIndeksi; i++){
+            if(lista[i] == o){
+                return i;
+            }
+        }
+        return -1;
     }
     
     //kaikkia allaolevia metodeita ei ole tarpeellista toteuttaa
@@ -122,23 +136,12 @@ public class KasvavaArray<T> implements List {
     }
 
     @Override
-    public Object get(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Object set(int i, Object e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void add(int i, Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    @Override
-    public int indexOf(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

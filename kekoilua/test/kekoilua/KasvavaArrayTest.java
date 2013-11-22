@@ -1,10 +1,5 @@
-
 package kekoilua;
-
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,22 +25,15 @@ public class KasvavaArrayTest {
         arS.add("kissa");
         assertEquals(true, arS.contains("kissa"));
     }
-    /**
-     * Test of add method, of class KasvavaArray.
-     */
+
     @Test
     public void testAdd() {
-        System.out.println("add");
         arI.add(2);
         assertEquals(true, arI.contains(2));
     }
 
-    /**
-     * Test of delete method, of class KasvavaArray.
-     */
     @Test
     public void testRemoveInt() {
-        System.out.println("delete");
         arI.add(3);
         arI.add(2);
         System.out.println(arI.toString());
@@ -54,15 +42,24 @@ public class KasvavaArrayTest {
         assertEquals(false, arI.contains(2));
     }
 
-    /**
-     * Test of length method, of class KasvavaArray.
-     */
     @Test
     public void testSize() {
-        System.out.println("length");
         arI.add(1);
         arI.add(2);
         arI.add(3);
         assertEquals(3, arI.size());
+    }
+    
+    @Test
+    public void testGet(){
+        arI.add(3);
+        assertEquals(3, arI.get(0));
+    }
+    
+    @Test
+    public void testIndexOf(){
+        arI.add(1);
+        arI.add(4);
+        assertEquals(1, arI.indexOf(4));
     }
 }
