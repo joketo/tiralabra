@@ -1,13 +1,14 @@
 package kekoilua;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Binaarikeko implements Keko{
 
-    ArrayList<Integer> keko;
+    List<Integer> keko;
 
     public Binaarikeko() {
-        keko = new ArrayList<>();
+        keko = new KasvavaArray<Integer>();
     }
     private void Tulosta(){ //testailua varten
         for(int i : keko){

@@ -97,6 +97,12 @@ public class KasvavaArray<T> implements List {
         }
         return -1;
     }
+     
+    @Override
+    public Object set(int i, Object e) {
+        lista[i] = e;
+        return e;
+    }
     
     //kaikkia allaolevia metodeita ei ole tarpeellista toteuttaa
     
@@ -132,11 +138,6 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object set(int i, Object e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

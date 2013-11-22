@@ -62,4 +62,11 @@ public class KasvavaArrayTest {
         arI.add(4);
         assertEquals(1, arI.indexOf(4));
     }
+    @Test
+    public void testSet(){
+        arI.add(1);
+        arI.add(2);
+        arI.set(1, 3);
+        assertEquals(3, arI.get(1));
+    }
 }
