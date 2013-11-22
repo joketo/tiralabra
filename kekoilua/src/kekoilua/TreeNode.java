@@ -3,7 +3,6 @@ package kekoilua;
 
 import java.util.LinkedList;
 
-//kaikki täällä on rikki, älkää katsoko tänne!
 
 public class TreeNode {
     private int arvo;
@@ -18,6 +17,13 @@ public class TreeNode {
     
     public void lisaaLapsi(TreeNode i){
         lapset.add(i);
+    }
+    
+    public int getArvo(){
+        return arvo;
+    }
+    public int getAste(){
+        return aste;
     }
     
 }
