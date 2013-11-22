@@ -11,18 +11,24 @@ import static org.junit.Assert.*;
 
 public class KasvavaArrayTest {
     
-    KasvavaArray<Integer> ar;
+    KasvavaArray<Integer> arI;
+    KasvavaArray<String> arS;
     @Before
     public void setUp() {
-        ar = new KasvavaArray<>();
+        arI = new KasvavaArray<>();
+        arS = new KasvavaArray<>();
+    }
+      
+    @Test
+    public void testContainsToimiiKunYksiInt(){
+        arI.add(3);
+        assertEquals(true, arI.contains(3));
     }
     
-    
-    
     @Test
-    public void testContainsToimiiKunYksiAlkio(){
-        ar.add(3);
-        assertEquals(true, ar.contains(3));
+    public void testContainsToimiiKunYksiString(){
+        arS.add("kissa");
+        assertEquals(true, arS.contains("kissa"));
     }
     /**
      * Test of add method, of class KasvavaArray.
@@ -30,37 +36,33 @@ public class KasvavaArrayTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        Object alkio = null;
-        KasvavaArray instance = null;
-        instance.add(alkio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        arI.add(2);
+        assertEquals(true, arI.contains(2));
     }
 
     /**
      * Test of delete method, of class KasvavaArray.
      */
     @Test
-    public void testDelete() {
+    public void testRemoveInt() {
         System.out.println("delete");
-        Object alkio = null;
-        KasvavaArray instance = null;
-        instance.remove(alkio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        arI.add(3);
+        arI.add(2);
+        System.out.println(arI.toString());
+        arI.remove(2);
+        System.out.println(arI.toString());
+        assertEquals(false, arI.contains(2));
     }
 
     /**
      * Test of length method, of class KasvavaArray.
      */
     @Test
-    public void testLength() {
+    public void testSize() {
         System.out.println("length");
-        KasvavaArray instance = null;
-        int expResult = 0;
-        int result = instance.size();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        arI.add(1);
+        arI.add(2);
+        arI.add(3);
+        assertEquals(3, arI.size());
     }
 }

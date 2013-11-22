@@ -16,7 +16,7 @@ public class KasvavaArray<T> implements List {
         lista = new Object[100];
         viimeisenIndeksi = -1;
     }
-    
+
     private T getT(int i) {
         @SuppressWarnings("unchecked")
         final T t = (T) lista[i];
@@ -25,13 +25,8 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public int size() {
-        int pituus = 0;
-        for (int i = 0; i <= lista.length; i++) {
-            if (lista[i] != null) {
-                pituus++;
-            }
-        }
-        return pituus;
+
+        return viimeisenIndeksi + 1;
     }
 
     @Override
@@ -45,8 +40,8 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public boolean contains(Object o) {
-        for(int i = 0; i < lista.length; i++){
-            if(lista[i] == (T)o){
+        for (int i = 0; i <= viimeisenIndeksi; i++) {
+            if (lista[i] == o) {
                 return true;
             }
         }
@@ -65,20 +60,35 @@ public class KasvavaArray<T> implements List {
         }
         return true;
     }
-
+    
+    @Override
+    public Object remove(int k) { 
+        //boolean loytyy = false;
+        Object[] kopio = new Object[lista.length];
+        for(int i = 0; i <= viimeisenIndeksi; i++){         
+            if(i == k){
+                break;
+            }
+            kopio[i] = lista[i];
+        }
+        for(int i = k+1; i <= viimeisenIndeksi; i++){
+            kopio[i-1] = lista[i];
+        }
+        viimeisenIndeksi--;
+        lista = kopio;
+        return k;
+    }
+    
+    public String toString(){
+        Object[] subarray = Arrays.copyOfRange(lista, 0, viimeisenIndeksi+1);
+        return Arrays.toString(subarray);
+    }
+    
+    //kaikkia allaolevia metodeita ei ole tarpeellista toteuttaa
+    
     @Override
     public boolean remove(Object o) {
-        Object[] kopio = Arrays.copyOf(lista, lista.length * 2);
-        for (int j = 0; j <= lista.length; j++) {
-            for (int i = 0; i < lista.length; i++) {
-                if (lista[i] == (T) o) {
-                    j++; //ei kopioida kopioon tätä
-                }
-                kopio[i] = lista[j];
-            }
-        }
-        this.lista = kopio;
-        return true;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -126,10 +136,6 @@ public class KasvavaArray<T> implements List {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object remove(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public int indexOf(Object o) {
@@ -155,8 +161,8 @@ public class KasvavaArray<T> implements List {
     public List subList(int i, int i1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-        @Override
+
+    @Override
     public Iterator iterator() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
