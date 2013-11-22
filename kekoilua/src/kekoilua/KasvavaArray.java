@@ -62,7 +62,6 @@ public class KasvavaArray<T> implements List {
     
     @Override
     public Object remove(int k) { 
-        //boolean loytyy = false;
         Object[] kopio = new Object[lista.length];
         for(int i = 0; i <= viimeisenIndeksi; i++){         
             if(i == k){
@@ -104,7 +103,7 @@ public class KasvavaArray<T> implements List {
         return e;
     }
     
-    //kaikkia allaolevia metodeita ei ole tarpeellista toteuttaa
+    //kaikkia allaolevia metodeita ei ole tarpeellista toteuttaa, toteuttejen jos tarvetta tulee
     
     @Override
     public boolean remove(Object o) {
