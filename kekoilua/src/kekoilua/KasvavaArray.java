@@ -30,7 +30,7 @@ public class KasvavaArray<T> implements List {
 
     @Override
     public boolean isEmpty() {
-        if (lista[0] == null) {
+        if (viimeisenIndeksi == -1) {
             return true;
         } else {
             return false;
@@ -62,6 +62,7 @@ public class KasvavaArray<T> implements List {
     
     @Override
     public Object remove(int k) { 
+        T alkio = getT(k);
         Object[] kopio = new Object[lista.length];
         for(int i = 0; i <= viimeisenIndeksi; i++){         
             if(i == k){
@@ -74,7 +75,7 @@ public class KasvavaArray<T> implements List {
         }
         viimeisenIndeksi--;
         lista = kopio;
-        return getT(k);
+        return alkio;
     }
     
     @Override
