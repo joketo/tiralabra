@@ -1,11 +1,16 @@
 package kekoilua;
 
+import java.util.LinkedList;
+
 public class Binomikeko implements Keko {
     
     private TreeNode nykyinenPuu;
+    private LinkedList<TreeNode> rootList; 
+    
     public Binomikeko(){
-
+         nykyinenPuu = null;
     }
+    
 
     private TreeNode yhdistaPuut(TreeNode a, TreeNode b){
         if(a.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
@@ -31,10 +36,8 @@ public class Binomikeko implements Keko {
         }
     }
     
-    
-    
-    private void seuraava(){
-        
+    private void seuraava(){ //tarkottaakohan tätä?
+        this.nykyinenPuu.seuraava();
     }
         
     
@@ -50,9 +53,10 @@ public class Binomikeko implements Keko {
          heap.next(); p.next(); q.next()
      */
     
-    private void lisaaPuu(TreeNode tree){
-        
+    private void lisaaPuu(TreeNode tree){//nykyinenPuu saa lapsia?
+        this.nykyinenPuu.lisaaLapsi(tree);
     }
+    
     @Override
     public void Delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -65,9 +69,24 @@ public class Binomikeko implements Keko {
         uusikeko.lisaaPuu(keonEkapuu);
         yhdistaKeot(this, uusikeko);
     }
+    
+    private TreeNode annaJuuriSisar(TreeNode node){
+        int indeksi = rootList.indexOf(node);
+        return rootList.get(indeksi+1); //
+    }
 
     @Override
     public int getYlin() {
+        TreeNode x = null;
+        TreeNode y = nykyinenPuu;
+        int min = Integer.MAX_VALUE;
+        while(x != null){
+            if(x.getArvo() < min){ //arvo vai aste?
+                min = x.getArvo();
+                y = x;
+            }
+            x = annaJuuriSisar(x);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

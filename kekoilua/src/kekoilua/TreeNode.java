@@ -6,11 +6,11 @@ import java.util.LinkedList;
 
 public class TreeNode {
     private int arvo;
-    LinkedList lapset;
+    LinkedList<TreeNode> lapset;
     private int aste;
     
     public TreeNode(int juurenarvo, int aste){
-        this.lapset = new LinkedList();
+        this.lapset = new LinkedList<>();
         this.arvo = juurenarvo;
         this.aste = aste;
     }
@@ -35,5 +35,6 @@ public class TreeNode {
     public void seuraava(){
         
     }
+    
     
 }
