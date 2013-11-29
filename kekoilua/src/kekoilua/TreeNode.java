@@ -24,14 +24,15 @@ public class TreeNode {
     
     public TreeNode Yhdista(TreeNode b){
         if(this.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
-            
             this.lisaaLapsi(b);
             b.setVanhempi(this);
+            this.aste++;
             return this;
         }
         else{
             b.lisaaLapsi(this);
             this.vanhempi = b;
+            b.aste++;
             return b;
         }
     }

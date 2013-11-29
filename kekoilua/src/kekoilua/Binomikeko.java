@@ -11,6 +11,7 @@ public class Binomikeko implements Keko {
 
     public Binomikeko() {
         rootList = new LinkedList<>();
+
     }
 
     private TreeNode annaJuuriSisar(TreeNode node) {
@@ -19,17 +20,25 @@ public class Binomikeko implements Keko {
     }
 
     private void lisaaPuu(TreeNode tree) {
-        rootList.add(tree);
+        if(rootList.isEmpty()){
+            rootList.add(tree);
+        }
+        else if (tree.getAste() < rootList.getFirst().getAste()) {
+            rootList.addFirst(tree);
+        }
     }
 
     private void yhdistaKeot(Binomikeko b) {
+
         Iterator<TreeNode> aIt = this.rootList.iterator();
         Iterator<TreeNode> bIt = b.rootList.iterator();
 
         while (aIt.hasNext() && bIt.hasNext()) {
-            TreeNode tree = aIt.next().Yhdista(bIt.next());
-            if (!aIt.next().onkoTyhja()) {
-                tree = tree.Yhdista(aIt.next());
+            TreeNode anyt = aIt.next();
+            TreeNode bnyt = bIt.next();
+            TreeNode tree = anyt.Yhdista(bnyt);
+            if (!anyt.onkoTyhja()) {
+                tree = tree.Yhdista(anyt);
             }
             this.lisaaPuu(tree);
         }
@@ -92,8 +101,12 @@ public class Binomikeko implements Keko {
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
-        rootList.add(keonEkapuu);
-        yhdistaKeot(uusikeko);
+        uusikeko.rootList.add(keonEkapuu);
+        if (rootList.isEmpty()) {
+            rootList.add(keonEkapuu);
+        } else {
+            yhdistaKeot(uusikeko);
+        }
     }
 
     @Override

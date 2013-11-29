@@ -51,4 +51,18 @@ public class BinomikekoTest {
         keko.Insert(6);
         assertEquals(keko.getYlin(), 4);
     }
+    
+    @Test
+    public void testInsertIsommallaMaaralla(){
+        keko.Insert(4);
+        keko.Insert(3);
+        keko.Insert(1);
+        keko.Insert(5);
+        keko.Insert(3);
+        keko.Insert(7);
+        keko.Insert(5);
+        System.out.println(keko.toString());
+        assertEquals(1, keko.getYlin());
+        
+    }
 }
