@@ -2,6 +2,7 @@
 package kekoilua;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class TreeNode {
@@ -19,12 +20,25 @@ public class TreeNode {
         lapset.add(i);
     }
     
+    public TreeNode Yhdista(TreeNode b){
+        if(this.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
+            this.lisaaLapsi(b);
+            return this;
+        }
+        else{
+            b.lisaaLapsi(this);
+            return b;
+        }
+    }
+    
     public int getArvo(){
         return arvo;
     }
+    
     public int getAste(){
         return aste;
     }
+    
     public boolean onkoTyhja(){
         if(lapset.isEmpty()){
             return true;
@@ -32,9 +46,8 @@ public class TreeNode {
           return false;  
         }
     }
-    public void seuraava(){
-        
+    public List annaLapset(){
+        return lapset;
     }
-    
     
 }

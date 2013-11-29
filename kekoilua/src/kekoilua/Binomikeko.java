@@ -8,26 +8,19 @@ public class Binomikeko implements Keko {
     private LinkedList<TreeNode> rootList; 
     
     public Binomikeko(){
-         nykyinenPuu = null;
+        rootList = new LinkedList<>();
+        nykyinenPuu = rootList.getFirst();
     }
     
-
-    private TreeNode yhdistaPuut(TreeNode a, TreeNode b){
-        if(a.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
-            a.lisaaLapsi(b);
-            return a;
-        }
-        else{
-            b.lisaaLapsi(a);
-            return b;
-        }
+    private void lisaaJuurilistaan(TreeNode juuri){
+        rootList.add(juuri);
     }
     
     private void yhdistaKeot(Binomikeko a, Binomikeko b){
         while(a != null && b != null){
-            TreeNode tree = yhdistaPuut(a.nykyinenPuu, b.nykyinenPuu);
+            TreeNode tree = a.nykyinenPuu.Yhdista(b.nykyinenPuu);
             if(this.nykyinenPuu.onkoTyhja()){
-                tree = yhdistaPuut(tree, this.nykyinenPuu);
+                tree = tree.Yhdista(this.nykyinenPuu);
             }
             this.lisaaPuu(tree);
             this.seuraava();
@@ -35,11 +28,6 @@ public class Binomikeko implements Keko {
             b.seuraava();
         }
     }
-    
-    private void seuraava(){ //tarkottaakohan tätä?
-        this.nykyinenPuu.seuraava();
-    }
-        
     
     /*
      * function merge(p, q)
@@ -53,7 +41,13 @@ public class Binomikeko implements Keko {
          heap.next(); p.next(); q.next()
      */
     
+    private void seuraava(){ //tarkottaakohan tätä?
+       nykyinenPuu = annaJuuriSisar(nykyinenPuu);
+    }
+      
+    
     private void lisaaPuu(TreeNode tree){//nykyinenPuu saa lapsia?
+        rootList.add(tree);
         this.nykyinenPuu.lisaaLapsi(tree);
     }
     
@@ -67,27 +61,32 @@ public class Binomikeko implements Keko {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a, 0); //mikä on tyjän puun ainoan alkion aste?
         uusikeko.lisaaPuu(keonEkapuu);
+        uusikeko.lisaaJuurilistaan(keonEkapuu);
         yhdistaKeot(this, uusikeko);
     }
     
     private TreeNode annaJuuriSisar(TreeNode node){
-        int indeksi = rootList.indexOf(node);
-        return rootList.get(indeksi+1); //
+        int nykIndeksi = rootList.indexOf(node);
+        return rootList.get(nykIndeksi+1); //
     }
 
     @Override
     public int getYlin() {
+        return getMinimiNode().getArvo();
+    }
+    
+    private TreeNode getMinimiNode(){
         TreeNode x = null;
-        TreeNode y = nykyinenPuu;
+        TreeNode y = rootList.getFirst(); //head
         int min = Integer.MAX_VALUE;
         while(x != null){
-            if(x.getArvo() < min){ //arvo vai aste?
+            if(x.getArvo() < min){
                 min = x.getArvo();
                 y = x;
             }
             x = annaJuuriSisar(x);
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return y;
     }
     
        
