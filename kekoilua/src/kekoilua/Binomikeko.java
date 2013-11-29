@@ -29,26 +29,12 @@ public class Binomikeko implements Keko {
         }
     }
     
-    /*
-     * function merge(p, q)
-       while not (p.end() and q.end())
-         tree = mergeTree(p.currentTree(), q.currentTree())
-        
-         if not heap.currentTree().empty()
-            tree = mergeTree(tree, heap.currentTree())
-         
-         heap.addTree(tree)
-         heap.next(); p.next(); q.next()
-     */
-    
     private void seuraava(){ //tarkottaakohan tätä?
        nykyinenPuu = annaJuuriSisar(nykyinenPuu);
-    }
-      
+    }  
     
-    private void lisaaPuu(TreeNode tree){//nykyinenPuu saa lapsia?
+    private void lisaaPuu(TreeNode tree){
         rootList.add(tree);
-        this.nykyinenPuu.lisaaLapsi(tree);
     }
     
     @Override
@@ -59,7 +45,7 @@ public class Binomikeko implements Keko {
     @Override
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
-        TreeNode keonEkapuu = new TreeNode(a, 0); //mikä on tyjän puun ainoan alkion aste?
+        TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
         uusikeko.lisaaPuu(keonEkapuu);
         uusikeko.lisaaJuurilistaan(keonEkapuu);
         yhdistaKeot(this, uusikeko);
