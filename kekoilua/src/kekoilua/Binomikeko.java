@@ -4,16 +4,12 @@ import java.util.LinkedList;
 
 public class Binomikeko implements Keko {
     
-    private TreeNode nykyinenPuu;
+    private TreeNode nykyinenPuu; //periaatteessa tarpeeton, yhdistaKeot käyttää mutta voisi toteuttaa nätimminkin
     private LinkedList<TreeNode> rootList; 
     
     public Binomikeko(){
         rootList = new LinkedList<>();
         nykyinenPuu = rootList.getFirst();
-    }
-    
-    private void lisaaJuurilistaan(TreeNode juuri){
-        rootList.add(juuri);
     }
     
     private void yhdistaKeot(Binomikeko a, Binomikeko b){
@@ -29,7 +25,7 @@ public class Binomikeko implements Keko {
         }
     }
     
-    private void seuraava(){ //tarkottaakohan tätä?
+    private void seuraava(){
        nykyinenPuu = annaJuuriSisar(nykyinenPuu);
     }  
     
@@ -47,7 +43,6 @@ public class Binomikeko implements Keko {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
         uusikeko.lisaaPuu(keonEkapuu);
-        uusikeko.lisaaJuurilistaan(keonEkapuu);
         yhdistaKeot(this, uusikeko);
     }
     
@@ -74,7 +69,5 @@ public class Binomikeko implements Keko {
         }
         return y;
     }
-    
-       
     
 }
