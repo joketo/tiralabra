@@ -63,5 +63,7 @@ public class TreeNode {
     public List<TreeNode> annaLapset(){
         return lapset;
     }
-    
+    public String toString(){
+        return "aste: " + aste +" arvo: "+ arvo + ", lapset: " + lapset.size() + "\n";
+    }
 }

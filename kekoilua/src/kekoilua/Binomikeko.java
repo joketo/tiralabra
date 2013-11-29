@@ -25,14 +25,13 @@ public class Binomikeko implements Keko {
     private void yhdistaKeot(Binomikeko b) {
         Iterator<TreeNode> aIt = this.rootList.iterator();
         Iterator<TreeNode> bIt = b.rootList.iterator();
-        
+
         while (aIt.hasNext() && bIt.hasNext()) {
-                TreeNode tree = aIt.next().Yhdista(bIt.next());
-                if(!aIt.next().onkoTyhja()){
-                    tree = tree.Yhdista(aIt.next());
-                }
-                this.lisaaPuu(tree);
-          
+            TreeNode tree = aIt.next().Yhdista(bIt.next());
+            if (!aIt.next().onkoTyhja()) {
+                tree = tree.Yhdista(aIt.next());
+            }
+            this.lisaaPuu(tree);
         }
     }
 
@@ -93,7 +92,7 @@ public class Binomikeko implements Keko {
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
-        uusikeko.lisaaPuu(keonEkapuu);
+        rootList.add(keonEkapuu);
         yhdistaKeot(uusikeko);
     }
 
@@ -114,5 +113,13 @@ public class Binomikeko implements Keko {
             x = annaJuuriSisar(x);
         }
         return y;
+    }
+
+    public String toString() {
+        String ret = "";
+        for (TreeNode i : rootList) {
+            ret += i.toString();
+        }
+        return ret;
     }
 }

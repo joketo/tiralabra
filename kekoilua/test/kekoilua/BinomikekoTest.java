@@ -26,6 +26,7 @@ public class BinomikekoTest {
         System.out.println("Delete");
         keko.Insert(1);
         keko.Insert(2);
+        System.out.println(keko.toString());
         keko.Delete();
         assertEquals(keko.getYlin(), 2);
     }
@@ -36,11 +37,8 @@ public class BinomikekoTest {
     @Test
     public void testInsert() {
         System.out.println("Insert");
-        int a = 0;
-        Binomikeko instance = new Binomikeko();
-        instance.Insert(a);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keko.Insert(3);
+        assertEquals(keko.getYlin(), 3);
     }
 
     /**
@@ -48,12 +46,9 @@ public class BinomikekoTest {
      */
     @Test
     public void testGetYlin() {
-        System.out.println("getYlin");
-        Binomikeko instance = new Binomikeko();
-        int expResult = 0;
-        int result = instance.getYlin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keko.Insert(4);
+        keko.Insert(5);
+        keko.Insert(6);
+        assertEquals(keko.getYlin(), 4);
     }
 }
