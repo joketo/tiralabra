@@ -3,19 +3,19 @@ package kekoilua;
 import java.util.LinkedList;
 
 public class Binomikeko implements Keko {
-    
+
     private TreeNode nykyinenPuu; //periaatteessa tarpeeton, yhdistaKeot käyttää mutta voisi toteuttaa nätimminkin
-    private LinkedList<TreeNode> rootList; 
-    
-    public Binomikeko(){
+    private LinkedList<TreeNode> rootList;
+
+    public Binomikeko() {
         rootList = new LinkedList<>();
         nykyinenPuu = rootList.getFirst();
     }
-    
-    private void yhdistaKeot(Binomikeko a, Binomikeko b){
-        while(a != null && b != null){
+
+    private void yhdistaKeot(Binomikeko a, Binomikeko b) {
+        while (a != null && b != null) {
             TreeNode tree = a.nykyinenPuu.Yhdista(b.nykyinenPuu);
-            if(this.nykyinenPuu.onkoTyhja()){
+            if (this.nykyinenPuu.onkoTyhja()) {
                 tree = tree.Yhdista(this.nykyinenPuu);
             }
             this.lisaaPuu(tree);
@@ -24,18 +24,52 @@ public class Binomikeko implements Keko {
             b.seuraava();
         }
     }
-    
-    private void seuraava(){
-       nykyinenPuu = annaJuuriSisar(nykyinenPuu);
-    }  
-    
-    private void lisaaPuu(TreeNode tree){
+
+    private void seuraava() {
+        nykyinenPuu = annaJuuriSisar(nykyinenPuu);
+    }
+
+    private void lisaaPuu(TreeNode tree) {
         rootList.add(tree);
     }
-    
+
     @Override
     public void Delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TreeNode min = rootList.getFirst();
+        Binomikeko tmp = new Binomikeko();
+        for (TreeNode i : rootList) {
+            if (i.getArvo() < min.getArvo()) { //halutaanko nyt tosiaan vertailla arvoja?
+                min = i;
+            }
+        }
+        for (TreeNode a : min.annaLapset()) {
+            tmp.lisaaPuu(a);
+        }
+        this.removeTree(min);
+        this.yhdistaKeot(this, tmp);
+    }
+
+    private void removeTree(TreeNode poistettava) {
+        
+    }
+    
+    private void pienennaArvo(TreeNode x, int uusiArvo){
+        if(uusiArvo > x.getArvo()){
+            System.out.println("Uuden arvon tulee olla pienempi kuin nykyisen arvon");
+            return;
+        }
+        x.setArvo(uusiArvo);
+        TreeNode y = x;
+        TreeNode z = y.getVanhempi();
+        while(z != null && y.getArvo() < z.getArvo()){
+            
+            int yynArvo = y.getArvo(); //vaihdetaan arvot päittäin
+            y.setArvo(z.getArvo());
+            z.setArvo(yynArvo);
+            
+            y = z;
+            z = y.getVanhempi();
+        }
     }
 
     @Override
@@ -45,23 +79,23 @@ public class Binomikeko implements Keko {
         uusikeko.lisaaPuu(keonEkapuu);
         yhdistaKeot(this, uusikeko);
     }
-    
-    private TreeNode annaJuuriSisar(TreeNode node){
+
+    private TreeNode annaJuuriSisar(TreeNode node) {
         int nykIndeksi = rootList.indexOf(node);
-        return rootList.get(nykIndeksi+1); //
+        return rootList.get(nykIndeksi + 1); 
     }
 
     @Override
     public int getYlin() {
         return getMinimiNode().getArvo();
     }
-    
-    private TreeNode getMinimiNode(){
+
+    private TreeNode getMinimiNode() {
         TreeNode x = null;
         TreeNode y = rootList.getFirst(); //head
         int min = Integer.MAX_VALUE;
-        while(x != null){
-            if(x.getArvo() < min){
+        while (x != null) {
+            if (x.getArvo() < min) {
                 min = x.getArvo();
                 y = x;
             }
@@ -69,5 +103,4 @@ public class Binomikeko implements Keko {
         }
         return y;
     }
-    
 }

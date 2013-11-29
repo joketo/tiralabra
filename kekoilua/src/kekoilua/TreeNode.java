@@ -7,13 +7,15 @@ import java.util.List;
 
 public class TreeNode {
     private int arvo;
-    LinkedList<TreeNode> lapset;
+    private LinkedList<TreeNode> lapset;
     private int aste;
+    private TreeNode vanhempi;
     
     public TreeNode(int juurenarvo, int aste){
         this.lapset = new LinkedList<>();
         this.arvo = juurenarvo;
         this.aste = aste;
+        this.vanhempi = null;
     }
     
     public void lisaaLapsi(TreeNode i){
@@ -22,13 +24,22 @@ public class TreeNode {
     
     public TreeNode Yhdista(TreeNode b){
         if(this.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
+            
             this.lisaaLapsi(b);
+            b.setVanhempi(this);
             return this;
         }
         else{
             b.lisaaLapsi(this);
+            this.vanhempi = b;
             return b;
         }
+    }
+    public void setArvo(int newArvo){
+        this.arvo = newArvo;
+    }
+    public void setVanhempi(TreeNode vanhempi){
+        this.vanhempi = vanhempi;
     }
     
     public int getArvo(){
@@ -38,6 +49,9 @@ public class TreeNode {
     public int getAste(){
         return aste;
     }
+    public TreeNode getVanhempi(){
+        return this.vanhempi;
+    }
     
     public boolean onkoTyhja(){
         if(lapset.isEmpty()){
@@ -46,7 +60,7 @@ public class TreeNode {
           return false;  
         }
     }
-    public List annaLapset(){
+    public List<TreeNode> annaLapset(){
         return lapset;
     }
     
