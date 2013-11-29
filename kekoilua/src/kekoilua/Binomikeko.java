@@ -1,6 +1,8 @@
 package kekoilua;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Binomikeko implements Keko {
 
@@ -38,19 +40,33 @@ public class Binomikeko implements Keko {
         TreeNode min = rootList.getFirst();
         Binomikeko tmp = new Binomikeko();
         for (TreeNode i : rootList) {
-            if (i.getArvo() < min.getArvo()) { //halutaanko nyt tosiaan vertailla arvoja?
+            if (i.getArvo() < min.getArvo()) {
                 min = i;
             }
         }
         for (TreeNode a : min.annaLapset()) {
             tmp.lisaaPuu(a);
         }
-        this.removeTree(min);
+        this.poistaPuu(min);
         this.yhdistaKeot(this, tmp);
     }
 
-    private void removeTree(TreeNode poistettava) {
-        
+    private void poistaPuu(TreeNode poistettava) {
+        pienennaArvo(poistettava, Integer.MIN_VALUE);
+        TreeNode min = rootList.getFirst();
+        for (TreeNode i:rootList){
+            if(i.getArvo() < min.getArvo()){
+                min = i;
+            }
+        }
+        rootList.remove(min);
+        Binomikeko tmp = new Binomikeko();
+        List<TreeNode> list = min.annaLapset(); 
+        Collections.reverse(list); //reverse the order
+        for(TreeNode i : list){
+            tmp.lisaaPuu(i); //meneehän tää nyt oikeessa järjestyksessä...
+        }
+        this.yhdistaKeot(this, tmp);
     }
     
     private void pienennaArvo(TreeNode x, int uusiArvo){
@@ -71,6 +87,8 @@ public class Binomikeko implements Keko {
             z = y.getVanhempi();
         }
     }
+    
+    
 
     @Override
     public void Insert(int a) {
