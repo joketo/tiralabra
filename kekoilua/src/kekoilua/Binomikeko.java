@@ -1,21 +1,16 @@
 package kekoilua;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Binomikeko implements Keko {
 
-    private TreeNode nykyinenPuu; //periaatteessa tarpeeton, yhdistaKeot käyttää mutta voisi toteuttaa nätimminkin
     private LinkedList<TreeNode> rootList;
 
     public Binomikeko() {
         rootList = new LinkedList<>();
-        nykyinenPuu = rootList.getFirst();
-    }
-
-    private void seuraava() {
-        nykyinenPuu = annaJuuriSisar(nykyinenPuu);
     }
 
     private TreeNode annaJuuriSisar(TreeNode node) {
@@ -27,16 +22,17 @@ public class Binomikeko implements Keko {
         rootList.add(tree);
     }
 
-    private void yhdistaKeot(Binomikeko a, Binomikeko b) {
-        while (a != null && b != null) {
-            TreeNode tree = a.nykyinenPuu.Yhdista(b.nykyinenPuu);
-            if (this.nykyinenPuu.onkoTyhja()) {
-                tree = tree.Yhdista(this.nykyinenPuu);
-            }
-            this.lisaaPuu(tree);
-            this.seuraava();
-            a.seuraava();
-            b.seuraava();
+    private void yhdistaKeot(Binomikeko b) {
+        Iterator<TreeNode> aIt = this.rootList.iterator();
+        Iterator<TreeNode> bIt = b.rootList.iterator();
+        
+        while (aIt.hasNext() && bIt.hasNext()) {
+                TreeNode tree = aIt.next().Yhdista(bIt.next());
+                if(!aIt.next().onkoTyhja()){
+                    tree = tree.Yhdista(aIt.next());
+                }
+                this.lisaaPuu(tree);
+          
         }
     }
 
@@ -53,7 +49,7 @@ public class Binomikeko implements Keko {
             tmp.lisaaPuu(a);
         }
         this.poistaPuu(min);
-        this.yhdistaKeot(this, tmp);
+        this.yhdistaKeot(tmp);
     }
 
     private void poistaPuu(TreeNode poistettava) {
@@ -71,7 +67,7 @@ public class Binomikeko implements Keko {
         for (TreeNode i : list) {
             tmp.lisaaPuu(i); //meneehän tää nyt oikeessa järjestyksessä...
         }
-        this.yhdistaKeot(this, tmp);
+        this.yhdistaKeot(tmp);
     }
 
     private void pienennaArvo(TreeNode x, int uusiArvo) {
@@ -98,7 +94,7 @@ public class Binomikeko implements Keko {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
         uusikeko.lisaaPuu(keonEkapuu);
-        yhdistaKeot(this, uusikeko);
+        yhdistaKeot(uusikeko);
     }
 
     @Override
