@@ -63,18 +63,10 @@ public class KasvavaArray<T> implements List {
     @Override
     public Object remove(int k) { 
         T alkio = getT(k);
-        Object[] kopio = new Object[lista.length];
-        for(int i = 0; i <= viimeisenIndeksi; i++){         
-            if(i == k){
-                break;
-            }
-            kopio[i] = lista[i];
-        }
-        for(int i = k+1; i <= viimeisenIndeksi; i++){
-            kopio[i-1] = lista[i];
+        for(int i = k; i < viimeisenIndeksi; i++){
+            lista[i] = lista[i+1];
         }
         viimeisenIndeksi--;
-        lista = kopio;
         return alkio;
     }
     

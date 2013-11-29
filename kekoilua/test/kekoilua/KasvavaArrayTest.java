@@ -33,13 +33,24 @@ public class KasvavaArrayTest {
     }
 
     @Test
-    public void testRemoveInt() {
+    public void testRemoveViimeinenAlkio() {
         arI.add(3);
         arI.add(2);
         System.out.println(arI.toString());
-        arI.remove(2);
+        arI.remove(1);
         System.out.println(arI.toString());
         assertEquals(false, arI.contains(2));
+    }
+    
+    @Test
+    public void testRemoveSailyykoViimeinenOikeanaJosPoistaaKeskelta(){
+        arI.add(5);
+        arI.add(6);
+        arI.add(7);
+        System.out.println(arI.toString());
+        arI.remove(1);
+        System.out.println(arI.toString());
+        assertEquals(true, arI.contains(7));
     }
 
     @Test
