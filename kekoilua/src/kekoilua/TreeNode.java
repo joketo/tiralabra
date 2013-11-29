@@ -25,5 +25,15 @@ public class TreeNode {
     public int getAste(){
         return aste;
     }
+    public boolean onkoTyhja(){
+        if(lapset.isEmpty()){
+            return true;
+        }else{
+          return false;  
+        }
+    }
+    public void seuraava(){
+        
+    }
     
 }

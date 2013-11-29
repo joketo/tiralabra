@@ -2,106 +2,75 @@ package kekoilua;
 
 public class Binomikeko implements Keko {
     
+    private TreeNode nykyinenPuu;
     public Binomikeko(){
+
+    }
+
+    private TreeNode yhdistaPuut(TreeNode a, TreeNode b){
+        if(a.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
+            a.lisaaLapsi(b);
+            return a;
+        }
+        else{
+            b.lisaaLapsi(a);
+            return b;
+        }
+    }
+    
+    private void yhdistaKeot(Binomikeko a, Binomikeko b){
+        while(a != null && b != null){
+            TreeNode tree = yhdistaPuut(a.nykyinenPuu, b.nykyinenPuu);
+            if(this.nykyinenPuu.onkoTyhja()){
+                tree = yhdistaPuut(tree, this.nykyinenPuu);
+            }
+            this.lisaaPuu(tree);
+            this.seuraava();
+            a.seuraava();
+            b.seuraava();
+        }
+    }
+    
+    
+    
+    private void seuraava(){
         
     }
-
-    @Override
-    public void Delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Insert(int a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getYlin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //kaikki täällä on rikki, älkää katsoko tänne!
-/*
-    private Node juuri;
-    private Binomikeko(){
-        this.juuri = null;
-    }
-
-    private void Merge(Node toka) {
-         while(juuri != null && toka != null){
-             Node tree = MergeTree(juuri, toka);
-             if(juuri != null){
-                 tree = MergeTree(tree, );
-             }
-         }
-        /*
-         * while not (p.end() and q.end())
+    /*
+     * function merge(p, q)
+       while not (p.end() and q.end())
          tree = mergeTree(p.currentTree(), q.currentTree())
         
          if not heap.currentTree().empty()
-         tree = mergeTree(tree, heap.currentTree())
-        
+            tree = mergeTree(tree, heap.currentTree())
+         
          heap.addTree(tree)
          heap.next(); p.next(); q.next()
-         * 
-         * 
-         */
-       /* 
-    }
+     */
     
-    private Node addSubTree(Node eka, Node toka){
-        eka.setNext(toka);
-        return eka;
+    private void lisaaPuu(TreeNode tree){
+        
     }
-
-    private Node MergeTree(Node toka) {
-        if(eka.getValue() <= toka.getValue()){
-            return addSubTree(juuri, toka);
-        }else{
-            return addSubTree(toka, juuri);
-        }
-    }
-
     @Override
     public void Delete() {
-        
-        /*
-         * function deleteMin(heap)
-         min = heap.trees().first()
-         for each current in heap.trees()
-         if current.root < min then min = current
-         for each tree in min.subTrees()
-         tmp.addTree(tree)
-         heap.removeTree(min)
-         merge(heap, tmp)
-         */
-  /*  }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public void Insert(int a) {
-        Node uusiNodejuuri = new Node(a);
-        Node[] uusiKeko = {uusiNodejuuri};
-        Merge(uusiKeko);
+        Binomikeko uusikeko = new Binomikeko();
+        TreeNode keonEkapuu = new TreeNode(a, 0); //mikä on tyjän puun ainoan alkion aste?
+        uusikeko.lisaaPuu(keonEkapuu);
+        yhdistaKeot(this, uusikeko);
     }
 
     @Override
     public int getYlin() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-*/
+    
+       
+    
 }
