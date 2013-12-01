@@ -20,6 +20,7 @@ public class Binomikeko implements Keko {
     }
 
     private void lisaaPuu(TreeNode tree) {
+        System.out.println(this.toString());
         if(rootList.isEmpty()){
             rootList.add(tree);
         }
@@ -29,7 +30,6 @@ public class Binomikeko implements Keko {
     }
 
     private void yhdistaKeot(Binomikeko b) {
-
         Iterator<TreeNode> aIt = this.rootList.iterator();
         Iterator<TreeNode> bIt = b.rootList.iterator();
 
@@ -100,7 +100,7 @@ public class Binomikeko implements Keko {
     @Override
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
-        TreeNode keonEkapuu = new TreeNode(a, 0); //onhan aste 0?
+        TreeNode keonEkapuu = new TreeNode(a);
         uusikeko.rootList.add(keonEkapuu);
         if (rootList.isEmpty()) {
             rootList.add(keonEkapuu);

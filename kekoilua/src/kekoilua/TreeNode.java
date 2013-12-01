@@ -11,10 +11,10 @@ public class TreeNode {
     private int aste;
     private TreeNode vanhempi;
     
-    public TreeNode(int juurenarvo, int aste){
+    public TreeNode(int juurenarvo){
         this.lapset = new LinkedList<>();
         this.arvo = juurenarvo;
-        this.aste = aste;
+        this.aste = 0;
         this.vanhempi = null;
     }
     
