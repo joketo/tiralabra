@@ -115,15 +115,15 @@ public class Binomikeko implements Keko {
     }
 
     private TreeNode getMinimiNode() {
-        TreeNode x = null;
-        TreeNode y = rootList.getFirst(); //head
+        TreeNode y = null;
+        TreeNode minNode = rootList.getFirst(); //head
         int min = Integer.MAX_VALUE;
-        while (x != null) {
-            if (x.getArvo() < min) {
-                min = x.getArvo();
-                y = x;
+        while (minNode != null) {
+            if (minNode.getArvo() < min) {
+                min = minNode.getArvo();
+                y = minNode;
             }
-            x = annaJuuriSisar(x);
+            minNode = annaJuuriSisar(minNode);
         }
         return y;
     }

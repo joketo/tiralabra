@@ -24,7 +24,7 @@ public class BinomikekoTest {
     
     @Test
     public void toimiikoUudenKeonLuonti(){
-      keko.Insert(3);
+      keko.Insert(7);
       keko.Insert(5);
       keko.Insert(6);
     }
