@@ -10,16 +10,21 @@ public class TreeNode {
     private LinkedList<TreeNode> lapset;
     private int aste;
     private TreeNode vanhempi;
+    private TreeNode sisar;
     
     public TreeNode(int juurenarvo){
         this.lapset = new LinkedList<>();
         this.arvo = juurenarvo;
         this.aste = 0;
         this.vanhempi = null;
+        this.sisar = null;
     }
     
     public void lisaaLapsi(TreeNode i){
         lapset.add(i);
+    }
+    public void setSisar(TreeNode i){
+        this.sisar = i;
     }
     
     public TreeNode Yhdista(TreeNode b){
@@ -52,6 +57,9 @@ public class TreeNode {
     }
     public TreeNode getVanhempi(){
         return this.vanhempi;
+    }
+    public TreeNode getSisar(){
+        return this.sisar;
     }
     
     public boolean onkoTyhja(){
