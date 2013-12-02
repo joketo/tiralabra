@@ -13,6 +13,9 @@ public class Binomikeko implements Keko {
         rootList = new LinkedList<>();
 
     }
+    public void setRootList(LinkedList<TreeNode> nRootList){
+        this.rootList = nRootList;
+    }
 
     private TreeNode annaJuuriSisar(TreeNode node) {
         int nykIndeksi = rootList.indexOf(node);
@@ -21,15 +24,73 @@ public class Binomikeko implements Keko {
 
     private void lisaaPuu(TreeNode tree) {
         System.out.println(this.toString());
-        if(rootList.isEmpty()){
+        if (rootList.isEmpty()) {
             rootList.add(tree);
-        }
-        else if (tree.getAste() < rootList.getFirst().getAste()) {
+        } else if (tree.getAste() < rootList.getFirst().getAste()) {
             rootList.addFirst(tree);
         }
     }
 
-    private void yhdistaKeot(Binomikeko b) {
+    private LinkedList<TreeNode> yhdistaRootListit(Binomikeko a, Binomikeko b) {
+        LinkedList<TreeNode> yhdiste = new LinkedList<>();
+        Iterator<TreeNode> aIt = a.rootList.iterator();
+        Iterator<TreeNode> bIt = b.rootList.iterator();
+        TreeNode aa;
+        TreeNode bb;
+        if (!aIt.hasNext()) { //jos a.rootlist on tyhjä
+            if (!bIt.hasNext()) { //jos myös b.rootlist on tyhjä
+                return yhdiste;
+            } else if (bIt.hasNext()) { //jos a.rootlist on tyhjä mutta b.rootlist ei ole tyhjä
+                yhdiste.addAll(b.rootList);
+                return yhdiste;
+            }
+        } else if (!bIt.hasNext()) { //jos b.rootlist on tyhjä mutta a.rootlist ei ole tyhjä
+            yhdiste.addAll(a.rootList);
+            return yhdiste;
+        }
+        aa = aIt.next();
+        bb = bIt.next();
+        while (aIt.hasNext() || bIt.hasNext()) {
+            if (!aIt.hasNext()) { //jos a loppuu
+                yhdiste.add(bb);
+                bb = bIt.next();
+            } else if (!bIt.hasNext()) { //jos b loppuu                
+                yhdiste.add(aa);
+                aa = aIt.next();
+            } else if (aIt.hasNext() && bIt.hasNext()) {
+                if (aa.getAste() < bb.getAste()) {
+                    yhdiste.add(aa);
+                    aa = aIt.next();
+                } else {
+                    yhdiste.add(bb);
+                    bb = bIt.next();
+                }
+            }
+        }
+        if(aa.getAste()< bb.getAste()){
+            yhdiste.add(aa);
+            yhdiste.add(bb);
+        }else{
+            yhdiste.add(bb);
+            yhdiste.add(aa);
+        }
+        return yhdiste;
+    }
+    
+    
+    private Binomikeko uusiyhdistaKeot(Binomikeko a, Binomikeko b){
+        Binomikeko B = new Binomikeko();
+        B.setRootList(yhdistaRootListit(a, b));
+        if(B.rootList.isEmpty()){
+            return B;
+        }
+        Iterator<TreeNode> nykNode = B.rootList.iterator();
+        while(nykNode != null){
+            
+        }
+        
+    }
+    private void yhdistaKeot(Binomikeko b) { // tämä on rikki, tee kokonaan alusta?
         Iterator<TreeNode> aIt = this.rootList.iterator();
         Iterator<TreeNode> bIt = b.rootList.iterator();
 
