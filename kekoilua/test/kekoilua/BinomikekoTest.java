@@ -15,7 +15,7 @@ public class BinomikekoTest {
     public void setUp() {
         keko = new Binomikeko();
     }
-
+/*
     @Test
     public void toimiikoUudenKeonLuonti() {
         keko.Insert(4);
@@ -26,7 +26,7 @@ public class BinomikekoTest {
 
         keko.Insert(6);
         System.out.println(keko.toString());
-    }
+    }*/
 
     @Test
     public void testDelete() {
@@ -36,8 +36,8 @@ public class BinomikekoTest {
         System.out.println(keko.toString());
         keko.Delete();
         System.out.println(keko.toString());
-        assertEquals(keko.getYlin(), 2);
-    }
+        assertEquals(2, keko.getYlin());
+    }/*
 
     @Test
     public void testInsert() {
@@ -68,5 +68,5 @@ public class BinomikekoTest {
         System.out.println(keko.toString());
         assertEquals(1, keko.getYlin());
 
-    }
+    }*/
 }
