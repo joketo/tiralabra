@@ -61,14 +61,17 @@ public class TreeNode {
     public TreeNode getSisar(){
         return this.sisar;
     }
-    
     public TreeNode getlapsi(){
         return this.vasinLapsi;
     }
     public void setVasinLapsi(TreeNode i){
         this.vasinLapsi = i;
     }
+    @Override
     public String toString(){
-        return "aste: " + aste +" arvo: "+ this.arvo + ", lapsi: " + this.vasinLapsi + "\n";
+        if (this == null){
+            return "tyhjä";
+        }
+        return "aste: " + this.aste +" arvo: "+ this.arvo + ", lapsi:  \n";
     }
 }

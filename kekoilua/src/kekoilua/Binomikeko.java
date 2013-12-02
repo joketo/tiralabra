@@ -51,66 +51,72 @@ public class Binomikeko implements Keko {
         }
         return yhdiste;
     }
-    /*
-     * TreeNode a = this.head;
-     * TreeNode b = hb.head;
-     * 
-     * a = head[H1]
-     b = head[H2]
-     head[H1] = Min-Degree(a, b)
-     if head[H1] = NIL
-     return
-     if head[H1] = b
-     then b = a
-     a = head[H1]
-     while b <> NIL
-     do if sibling[a] = NIL
-     then sibling[a] = b
-     return
-     else if degree[sibling[a]] < degree[b]
-     then a = sibling[a]
-     else c = sibling[b]
-     sibling[b] = sibling[a]
-     sibling[a] = b
-     a = sibling[a]
-     b = c
-     */
+
+    private TreeNode minAste(TreeNode a, TreeNode b) {
+        if (a == null) {
+            return b;
+        } else if (b == null) {
+            return a;
+        } else if (a.getAste() < b.getAste()) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    private TreeNode BinomiMerge(Binomikeko ha, Binomikeko hb) {
+        TreeNode a = ha.head;
+        TreeNode b = hb.head;
+        ha.head = minAste(a, b);
+        if (ha.head == null) {
+            return null;
+        }
+        if (ha.head == b) {
+            b = a;
+        }
+        a = ha.head;
+        while (b != null) {
+            if (a.getSisar() == null) {
+                a.setSisar(b);
+                return b;
+            } else if (a.getSisar().getAste() < b.getAste()) {
+                a = a.getSisar();
+            } else {
+                TreeNode c = b.getSisar();
+                b.setSisar(a.getSisar());
+                a.setSisar(b);
+                a = a.getSisar();
+                b = c;
+            }
+        }
+        return b;
+    }
 
     private void yhdistaKeot(Binomikeko a, Binomikeko b) {
-        System.out.println("yhdistaKEot");
-        this.head = (yhdistaRootListit(a, b));
+        BinomiMerge(a, b);
+        //this.head = BinomiMerge(b);
         if (this.head == null) {
             return;
         }
-        System.out.println(this.head);
-        System.out.println(this.head.getSisar());
-        if (head.getSisar() != null) {
-            System.out.println(head.getSisar().getSisar());
-        }
-
         TreeNode prevX = null;
         TreeNode x = this.head;
         TreeNode nextX = x.getSisar();
         while (nextX != null) {
-            System.out.println("b ");
             if (x.getAste() != nextX.getAste() || (nextX.getSisar() != null && nextX.getSisar().getAste() == x.getAste())) {
-                System.out.println("i");
                 prevX = x;
                 x = nextX;
             } else if (x.getArvo() <= nextX.getArvo()) {
-                System.out.println("k");
                 x.setSisar(nextX.getSisar());
                 nextX.Yhdista(x);
-            } else if (prevX == null) {
-                System.out.println("e");
-                this.head = nextX;
             } else {
-                System.out.println("n");
-                prevX.setSisar(nextX);
+                if (prevX == null) {
+                    this.head = nextX;
+                } else {
+                    prevX.setSisar(nextX);
+                }
+                x.Yhdista(nextX);
+                x = nextX;
             }
-            x.Yhdista(nextX);
-            x = nextX;
-
             nextX = x.getSisar();
         }
     }
@@ -198,6 +204,7 @@ public class Binomikeko implements Keko {
         return y;
     }
 
+    @Override
     public String toString() {
         String ret = "t ";
         TreeNode i = this.head;
@@ -211,7 +218,11 @@ public class Binomikeko implements Keko {
     public static void main(String[] args) {
         Binomikeko keko = new Binomikeko();
         keko.Insert(4);
+        keko.Insert(3);
         keko.Insert(6);
-        keko.Insert(1);
+        keko.Insert(5);
+        keko.Insert(2);
+        System.out.println(keko);
+        System.out.println(keko.getYlin());
     }
 }

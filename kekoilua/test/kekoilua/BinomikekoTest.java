@@ -16,9 +16,6 @@ public class BinomikekoTest {
         keko = new Binomikeko();
     }
 
-    /**
-     * Test of Delete method, of class Binomikeko.
-     */
     @Test
     public void toimiikoUudenKeonLuonti() {
         keko.Insert(4);
@@ -51,6 +48,7 @@ public class BinomikekoTest {
 
     @Test
     public void testGetYlin() {
+        System.out.println("testGetYlin");
         keko.Insert(7);
         keko.Insert(5);
         keko.Insert(6);
@@ -59,6 +57,7 @@ public class BinomikekoTest {
 
     @Test
     public void testInsertIsommallaMaaralla() {
+        System.out.println("insertIsommalla");
         keko.Insert(4);
         keko.Insert(3);
         keko.Insert(1);
