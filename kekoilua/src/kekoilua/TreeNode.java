@@ -11,6 +11,7 @@ public class TreeNode {
     private int aste;
     private TreeNode vanhempi;
     private TreeNode sisar;
+    private TreeNode vasinLapsi;
     
     public TreeNode(int juurenarvo){
         this.lapset = new LinkedList<>();
@@ -18,16 +19,26 @@ public class TreeNode {
         this.aste = 0;
         this.vanhempi = null;
         this.sisar = null;
+        this.vasinLapsi = null;
+    }
+    private void paivitaVasinLapsi(){
+        this.vasinLapsi = lapset.getFirst();
     }
     
     public void lisaaLapsi(TreeNode i){
         lapset.add(i);
+        paivitaVasinLapsi();
     }
     public void setSisar(TreeNode i){
         this.sisar = i;
     }
     
-    public TreeNode Yhdista(TreeNode b){
+    public void Yhdista(TreeNode z){
+        this.vanhempi = z;
+        this.sisar = z.lapsi();
+        z.setVasinLapsi(this);
+        z.setAste(z.getAste()+1);
+        /*
         if(this.getArvo() <= b.getArvo()){ //halutaanko tähän aste vai arvo?
             this.lisaaLapsi(b);
             b.setVanhempi(this);
@@ -39,13 +50,16 @@ public class TreeNode {
             this.vanhempi = b;
             b.aste++;
             return b;
-        }
+        }*/
     }
     public void setArvo(int newArvo){
         this.arvo = newArvo;
     }
     public void setVanhempi(TreeNode vanhempi){
         this.vanhempi = vanhempi;
+    }
+    public void setAste(int aste){
+        this.aste = aste;
     }
     
     public int getArvo(){
@@ -62,6 +76,12 @@ public class TreeNode {
         return this.sisar;
     }
     
+    public TreeNode lapsi(){
+        return this.vasinLapsi;
+    }
+    public void setVasinLapsi(TreeNode i){
+        this.vasinLapsi = i;
+    }
     public boolean onkoTyhja(){
         if(lapset.isEmpty()){
             return true;

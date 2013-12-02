@@ -24,12 +24,12 @@ public class Binomikeko implements Keko {
     }
 
     private void lisaaPuu(TreeNode tree) {
-        System.out.println(this.toString());
-        if (rootList.isEmpty()) {
-            rootList.add(tree);
-        } else if (tree.getAste() < rootList.getFirst().getAste()) {
-            rootList.addFirst(tree);
-        }
+        /*if (rootList.isEmpty()) {
+         rootList.add(tree);
+         } else if (tree.getAste() < rootList.getFirst().getAste()) {
+         rootList.add(tree);
+         }*/
+        rootList.add(tree);
     }
 
     private LinkedList<TreeNode> yhdistaRootListit(Binomikeko a, Binomikeko b) {
@@ -78,20 +78,16 @@ public class Binomikeko implements Keko {
         return yhdiste;
     }
 
-    private Binomikeko yhdistaKeot(Binomikeko a, Binomikeko b) {
-        Binomikeko B = new Binomikeko();
-        B.setRootList(yhdistaRootListit(a, b));
-        if (B.rootList.isEmpty()) {
-            return B;
+    private void yhdistaKeot(Binomikeko a, Binomikeko b) {
+        // Binomikeko uusiKeko = new Binomikeko();
+        this.setRootList(yhdistaRootListit(a, b));
+        if (this.rootList.isEmpty()) {
+            return;
         }
-        Iterator<TreeNode> nykNode = B.rootList.iterator();
+        // Iterator<TreeNode> nykNode = B.rootList.iterator();
         TreeNode prevX = null;
-        TreeNode x = nykNode.next();
+        TreeNode x = this.rootList.getFirst();
         TreeNode nextX = x.getSisar();
-        /*TreeNode nextnextX = null;
-        if (nykNode.hasNext()) {
-            nextnextX = nykNode.next();
-        }*/
         while (nextX != null) {
             if (x.getAste() != nextX.getAste() || (nextX.getSisar() != null && nextX.getSisar().getAste() == x.getAste())) {
                 prevX = x;
@@ -99,11 +95,9 @@ public class Binomikeko implements Keko {
             } else if (x.getArvo() <= nextX.getArvo()) {
                 x.setSisar(nextX.getSisar());
                 nextX.Yhdista(x);
-                
-                //voiko näin tehdä
             } else if (prevX == null) {
-                B.rootList.removeFirst();
-                B.rootList.addFirst(nextX); //tämä saattaa rikkoa jotain...
+                this.rootList.removeFirst();
+                this.rootList.addFirst(nextX); //tämä saattaa rikkoa jotain...
             } else {
                 prevX.setSisar(nextX);
                 x.Yhdista(nextX);
@@ -111,24 +105,7 @@ public class Binomikeko implements Keko {
             }
             nextX = x.getSisar();
         }
-        return B;
-
-    }/*
-     private void yhdistaKeot(Binomikeko b) { // tämä on rikki, tee kokonaan alusta?
-     Iterator<TreeNode> aIt = this.rootList.iterator();
-     Iterator<TreeNode> bIt = b.rootList.iterator();
-
-     while (aIt.hasNext() && bIt.hasNext()) {
-     TreeNode anyt = aIt.next();
-     TreeNode bnyt = bIt.next();
-     TreeNode tree = anyt.Yhdista(bnyt);
-     if (!anyt.onkoTyhja()) {
-     tree = tree.Yhdista(anyt);
-     }
-     this.lisaaPuu(tree);
-     }
-     }*/
-
+    }
 
     @Override
     public void Delete() {
@@ -187,12 +164,11 @@ public class Binomikeko implements Keko {
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
         TreeNode keonEkapuu = new TreeNode(a);
+        System.out.println(uusikeko.toString());
         uusikeko.rootList.add(keonEkapuu);
-        if (rootList.isEmpty()) {
-            rootList.add(keonEkapuu);
-        } else {
-            yhdistaKeot(this, uusikeko);
-        }
+        System.out.println(uusikeko.toString());
+        yhdistaKeot(this, uusikeko);
+        System.out.println(this.toString());
     }
 
     @Override
@@ -202,6 +178,9 @@ public class Binomikeko implements Keko {
 
     private TreeNode getMinimiNode() {
         TreeNode y = null;
+        if (this.rootList.isEmpty()) {
+            return y;
+        }
         TreeNode minNode = rootList.getFirst(); //head
         int min = Integer.MAX_VALUE;
         while (minNode != null) {
@@ -209,16 +188,42 @@ public class Binomikeko implements Keko {
                 min = minNode.getArvo();
                 y = minNode;
             }
-            minNode = annaJuuriSisar(minNode);
+            minNode = minNode.getSisar();
         }
         return y;
     }
 
     public String toString() {
-        String ret = "";
+        String ret = "t ";
         for (TreeNode i : rootList) {
             ret += i.toString();
         }
         return ret;
+    }
+    public void testaarootlistyhdistetta(){ //omaa testausta varten
+        LinkedList<TreeNode> a = new LinkedList<>();
+        LinkedList<TreeNode> b = new LinkedList<>();
+        TreeNode e = new TreeNode(7);
+        TreeNode ei = new TreeNode(6);
+        TreeNode ek = new TreeNode(3);
+        TreeNode f = new TreeNode(4);
+        a.add(f); //4
+        a.add(e); //7
+        b.add(ek); //3
+        b.add(ei); //6
+        Binomikeko ai = new Binomikeko();
+        Binomikeko bai = new Binomikeko();
+        ai.setRootList(a);
+        System.out.println("ai: " + ai.toString());
+        bai.setRootList(b);
+        System.out.println("bai: " + bai.toString());
+        LinkedList<TreeNode> yh = this.yhdistaRootListit(ai, bai);
+        ai.setRootList(yh);
+        System.out.println(ai.toString());
+    }
+
+    public static void main(String[] args) {
+        Binomikeko bi = new Binomikeko();
+        bi.testaarootlistyhdistetta();
     }
 }

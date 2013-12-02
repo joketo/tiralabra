@@ -22,13 +22,18 @@ public class BinomikekoTest {
      * Test of Delete method, of class Binomikeko.
      */
     
-    @Test
+   /* @Test
     public void toimiikoUudenKeonLuonti(){
-      keko.Insert(7);
+      keko.Insert(4);
+            System.out.println(keko.toString());
+
       keko.Insert(5);
+            System.out.println(keko.toString());
+
       keko.Insert(6);
-    }
-    /*
+      System.out.println(keko.toString());
+    }*/
+    
     @Test
     public void testDelete() {
         System.out.println("Delete");
@@ -36,13 +41,14 @@ public class BinomikekoTest {
         keko.Insert(2);
         System.out.println(keko.toString());
         keko.Delete();
+        System.out.println(keko.toString());
         assertEquals(keko.getYlin(), 2);
     }
 
     /**
      * Test of Insert method, of class Binomikeko.
      */
-/*    @Test
+    @Test
     public void testInsert() {
         System.out.println("Insert");
         keko.Insert(3);
@@ -60,7 +66,7 @@ public class BinomikekoTest {
         assertEquals(keko.getYlin(), 4);
     }
     
-   /* @Test
+   */ @Test
     public void testInsertIsommallaMaaralla(){
         keko.Insert(4);
         keko.Insert(3);
@@ -72,5 +78,5 @@ public class BinomikekoTest {
         System.out.println(keko.toString());
         assertEquals(1, keko.getYlin());
         
-    }*/
+    }
 }
