@@ -13,45 +13,45 @@ public class Binomikeko implements Keko {
         head = null;
     }
 
-    private TreeNode yhdistaRootListit(Binomikeko a, Binomikeko b) {
-        System.out.println("test");
-        TreeNode yhdiste = null;
-        TreeNode aa = a.head;
-        TreeNode bb = b.head;
-        if (aa == null) {
-            yhdiste = bb;
-            return yhdiste;
-        } else if (bb == null) {
-            yhdiste = aa;
-            return yhdiste;
-        } else if (aa != null && bb != null) {
-            if (aa.getAste() < bb.getAste()) {
-                yhdiste = aa;
-                aa = aa.getSisar();
-            } else {
-                yhdiste = bb;
-                bb = bb.getSisar();
-            }
-        }
-        while (aa != null || bb != null) {
-            System.out.println("a ");
-            if (aa == null) {
-                yhdiste.setSisar(bb);
-                bb = bb.getSisar();
-            } else if (bb == null) {
-                yhdiste.setSisar(aa);
-                aa = aa.getSisar();
-            } else if (aa.getAste() < bb.getAste()) {
-                yhdiste.setSisar(aa);
-                aa = aa.getSisar();
-            } else {
-                yhdiste.setSisar(bb);
-                bb = bb.getSisar();
-            }
-        }
-        return yhdiste;
-    }
-
+    /*    private TreeNode yhdistaRootListit(Binomikeko a, Binomikeko b) {
+     System.out.println("test");
+     TreeNode yhdiste = null;
+     TreeNode aa = a.head;
+     TreeNode bb = b.head;
+     if (aa == null) {
+     yhdiste = bb;
+     return yhdiste;
+     } else if (bb == null) {
+     yhdiste = aa;
+     return yhdiste;
+     } else if (aa != null && bb != null) {
+     if (aa.getAste() < bb.getAste()) {
+     yhdiste = aa;
+     aa = aa.getSisar();
+     } else {
+     yhdiste = bb;
+     bb = bb.getSisar();
+     }
+     }
+     while (aa != null || bb != null) {
+     System.out.println("a ");
+     if (aa == null) {
+     yhdiste.setSisar(bb);
+     bb = bb.getSisar();
+     } else if (bb == null) {
+     yhdiste.setSisar(aa);
+     aa = aa.getSisar();
+     } else if (aa.getAste() < bb.getAste()) {
+     yhdiste.setSisar(aa);
+     aa = aa.getSisar();
+     } else {
+     yhdiste.setSisar(bb);
+     bb = bb.getSisar();
+     }
+     }
+     return yhdiste;
+     }
+     */
     private TreeNode minAste(TreeNode a, TreeNode b) {
         if (a == null) {
             return b;
@@ -122,46 +122,66 @@ public class Binomikeko implements Keko {
     }
 
     @Override
-    public void Delete(){
-    //    pienennaArvo(this.getMinimiNode(), Integer.MIN_VALUE);
+    public void Delete() {
+        //    pienennaArvo(this.getMinimiNode(), Integer.MIN_VALUE);
         extractMin();
-       // this.poistaNode(this.getMinimiNode());
+        // this.poistaNode(this.getMinimiNode());
     }
-    
-    private void extractMin(){ //extract-Min
-        TreeNode min = new TreeNode(Integer.MAX_VALUE);
+
+    private void extractMin() { //extract-Min
+        TreeNode minEd = null;
+        int min = Integer.MAX_VALUE;
         Binomikeko tmp = new Binomikeko();
-        TreeNode edellinen = null;
+        TreeNode edellinen;
         TreeNode i = this.head;
-        while (i != null) {
-            if (i.getArvo() <= min.getArvo()) {
-                min = i;
+        if (i == null) {
+            return;
+        }
+
+        edellinen = null;
+        while (i.getSisar() != null) {
+            if (i.getArvo() <= min) {
+                min = i.getArvo();
+                minEd = edellinen;
             }
+
             edellinen = i;
             i = i.getSisar();
         }
-        System.out.println("MIN:" + min);
-        edellinen.setSisar(min.getSisar());
-        TreeNode x = min.getlapsi();
-        System.out.println("loo?");
-        if(x == null){
+
+        TreeNode poistettava;
+        System.out.println("LISTANYT: " + this.toString());
+        if (minEd == null) { // head on ainoa jolla ei isosiskoa
+            poistettava = this.head;
+            this.head = poistettava.getSisar();
+        } else {
+            poistettava = minEd.getSisar();
+            minEd.setSisar(poistettava.getSisar());
+        }
+        
+        TreeNode l = poistettava.getlapsi();
+        if(l == null) {
             return;
         }
-        while(x.getSisar() != null){
-            System.out.println("LOOP");
-            TreeNode next = x.getSisar();
-            x.setSisar(tmp.head);
-            tmp.head = x;
-            x = next;
+        
+        // on lapsia, yhdistetään ne
+        while (l.getSisar() != null) {
+            TreeNode next = l.getSisar();
+            l.setSisar(tmp.head);
+            tmp.head = l;
+            l = next;
         }
+        l.setSisar(tmp.head);
+        tmp.head = l;
         this.yhdistaKeot(this, tmp);
+
     }
 
     private void poistaNode(TreeNode poistettava) {
         pienennaArvo(poistettava, Integer.MIN_VALUE);
         extractMin();
     }
-    
+
     private void pienennaArvo(TreeNode x, int uusiArvo) {
         if (uusiArvo > x.getArvo()) {
             System.out.println("Uuden arvon tulee olla pienempi kuin nykyisen arvon");
@@ -189,6 +209,9 @@ public class Binomikeko implements Keko {
 
     @Override
     public int getYlin() {
+        if (this.head == null) { //pino menee tyhjäksi jossain..
+            return -1;
+        }
         return getMinimiNode().getArvo();
     }
 
@@ -228,6 +251,6 @@ public class Binomikeko implements Keko {
         System.out.println(keko);
         System.out.println(keko.getYlin());
         keko.Delete();
-        System.out.println(keko.getYlin());
+        //  System.out.println(keko.getYlin());
     }
 }

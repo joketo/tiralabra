@@ -72,6 +72,6 @@ public class TreeNode {
         if (this == null){
             return "tyhjä";
         }
-        return "aste: " + this.aste +" arvo: "+ this.arvo + ", lapsi:  ("+this.vasinLapsi+")\n";
+        return "aste: " + this.aste +" arvo: "+ this.arvo + ", lapsi:  ("+this.vasinLapsi+" SISAR: "+ this.sisar +")\n";
     }
 }
