@@ -1,10 +1,5 @@
 package kekoilua;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Binomikeko implements Keko {
 
     private BinomiNode head;
@@ -13,45 +8,6 @@ public class Binomikeko implements Keko {
         head = null;
     }
 
-    /*    private BinomiNode yhdistaRootListit(Binomikeko a, Binomikeko b) {
-     System.out.println("test");
-     BinomiNode yhdiste = null;
-     BinomiNode aa = a.head;
-     BinomiNode bb = b.head;
-     if (aa == null) {
-     yhdiste = bb;
-     return yhdiste;
-     } else if (bb == null) {
-     yhdiste = aa;
-     return yhdiste;
-     } else if (aa != null && bb != null) {
-     if (aa.getAste() < bb.getAste()) {
-     yhdiste = aa;
-     aa = aa.getSisar();
-     } else {
-     yhdiste = bb;
-     bb = bb.getSisar();
-     }
-     }
-     while (aa != null || bb != null) {
-     System.out.println("a ");
-     if (aa == null) {
-     yhdiste.setSisar(bb);
-     bb = bb.getSisar();
-     } else if (bb == null) {
-     yhdiste.setSisar(aa);
-     aa = aa.getSisar();
-     } else if (aa.getAste() < bb.getAste()) {
-     yhdiste.setSisar(aa);
-     aa = aa.getSisar();
-     } else {
-     yhdiste.setSisar(bb);
-     bb = bb.getSisar();
-     }
-     }
-     return yhdiste;
-     }
-     */
     private BinomiNode minAste(BinomiNode a, BinomiNode b) {
         if (a == null) {
             return b;
@@ -94,7 +50,6 @@ public class Binomikeko implements Keko {
 
     private void yhdistaKeot(Binomikeko a, Binomikeko b) {
         BinomiMerge(a, b);
-        //this.head = BinomiMerge(b);
         if (this.head == null) {
             return;
         }
@@ -123,9 +78,8 @@ public class Binomikeko implements Keko {
 
     @Override
     public void Delete() {
-        //    pienennaArvo(this.getMinimiNode(), Integer.MIN_VALUE);
         extractMin();
-        // this.poistaNode(this.getMinimiNode());
+        // poistaNode(this.getMinimiNode());
     }
 
     private void extractMin() { //extract-Min
@@ -158,12 +112,12 @@ public class Binomikeko implements Keko {
             poistettava = minEd.getSisar();
             minEd.setSisar(poistettava.getSisar());
         }
-        
+
         BinomiNode l = poistettava.getlapsi();
-        if(l == null) {
+        if (l == null) {
             return;
         }
-        
+
         // on lapsia, yhdistetään ne
         while (l.getSisar() != null) {
             BinomiNode next = l.getSisar();
@@ -209,7 +163,7 @@ public class Binomikeko implements Keko {
 
     @Override
     public int getYlin() {
-        if (this.head == null) { //pino menee tyhjäksi jossain..
+        if (this.head == null) {
             return -1;
         }
         return getMinimiNode().getArvo();
@@ -217,10 +171,9 @@ public class Binomikeko implements Keko {
 
     private BinomiNode getMinimiNode() {
         BinomiNode y = null;
-        BinomiNode minNode = this.head; //head
+        BinomiNode minNode = this.head;
         int min = Integer.MAX_VALUE;
         while (minNode != null) {
-            System.out.println("mitä tapahtuu");
             if (minNode.getArvo() < min) {
                 min = minNode.getArvo();
                 y = minNode;
@@ -239,18 +192,5 @@ public class Binomikeko implements Keko {
             i = i.getSisar();
         }
         return ret;
-    }
-
-    public static void main(String[] args) {
-        Binomikeko keko = new Binomikeko();
-        keko.Insert(4);
-        keko.Insert(3);
-        keko.Insert(6);
-        keko.Insert(5);
-        keko.Insert(2);
-        System.out.println(keko);
-        System.out.println(keko.getYlin());
-        keko.Delete();
-        //  System.out.println(keko.getYlin());
     }
 }
