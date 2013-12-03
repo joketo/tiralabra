@@ -19,6 +19,11 @@ public class Kekoilua {
         for(int i = 0; i < 100; i++){
             fibonaccikeko.Insert(i);
         }
-        
+        System.out.println("binäärikeosta otetaan keon ylin:");
+        binaarikeko.getYlin();
+        System.out.println("binomikeosta otetaan keon ylin:");
+        binomikeko.getYlin();
+        System.out.println("fibonaccikeosta otetaan keon ylin:");
+        fibonaccikeko.getYlin();
     }
 }
