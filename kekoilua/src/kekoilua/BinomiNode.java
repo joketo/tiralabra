@@ -5,14 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class TreeNode {
+public class BinomiNode {
     private int arvo;
     private int aste;
-    private TreeNode vanhempi;
-    private TreeNode sisar;
-    private TreeNode vasinLapsi;
+    private BinomiNode vanhempi;
+    private BinomiNode sisar;
+    private BinomiNode vasinLapsi;
     
-    public TreeNode(int juurenarvo){
+    public BinomiNode(int juurenarvo){
         this.arvo = juurenarvo;
         this.aste = 0;
         this.vanhempi = null;
@@ -27,11 +27,11 @@ public class TreeNode {
         else return false;
     }
     
-    public void setSisar(TreeNode i){
+    public void setSisar(BinomiNode i){
         this.sisar = i;
     }
     
-    public void Yhdista(TreeNode z){
+    public void Yhdista(BinomiNode z){
         System.out.println("testaus");
         this.vanhempi = z;
         this.sisar = z.getlapsi();
@@ -41,7 +41,7 @@ public class TreeNode {
     public void setArvo(int newArvo){
         this.arvo = newArvo;
     }
-    public void setVanhempi(TreeNode vanhempi){
+    public void setVanhempi(BinomiNode vanhempi){
         this.vanhempi = vanhempi;
     }
     public void setAste(int aste){
@@ -55,16 +55,16 @@ public class TreeNode {
     public int getAste(){
         return aste;
     }
-    public TreeNode getVanhempi(){
+    public BinomiNode getVanhempi(){
         return this.vanhempi;
     }
-    public TreeNode getSisar(){
+    public BinomiNode getSisar(){
         return this.sisar;
     }
-    public TreeNode getlapsi(){
+    public BinomiNode getlapsi(){
         return this.vasinLapsi;
     }
-    public void setVasinLapsi(TreeNode i){
+    public void setVasinLapsi(BinomiNode i){
         this.vasinLapsi = i;
     }
     @Override

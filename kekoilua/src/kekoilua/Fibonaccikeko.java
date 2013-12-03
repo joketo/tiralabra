@@ -3,6 +3,10 @@ package kekoilua;
 
 
 public class Fibonaccikeko implements Keko{
+    
+    public Fibonaccikeko(){
+        
+    }
 
     @Override
     public void Delete() {

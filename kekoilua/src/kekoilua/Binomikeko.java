@@ -7,17 +7,17 @@ import java.util.List;
 
 public class Binomikeko implements Keko {
 
-    private TreeNode head;
+    private BinomiNode head;
 
     public Binomikeko() {
         head = null;
     }
 
-    /*    private TreeNode yhdistaRootListit(Binomikeko a, Binomikeko b) {
+    /*    private BinomiNode yhdistaRootListit(Binomikeko a, Binomikeko b) {
      System.out.println("test");
-     TreeNode yhdiste = null;
-     TreeNode aa = a.head;
-     TreeNode bb = b.head;
+     BinomiNode yhdiste = null;
+     BinomiNode aa = a.head;
+     BinomiNode bb = b.head;
      if (aa == null) {
      yhdiste = bb;
      return yhdiste;
@@ -52,7 +52,7 @@ public class Binomikeko implements Keko {
      return yhdiste;
      }
      */
-    private TreeNode minAste(TreeNode a, TreeNode b) {
+    private BinomiNode minAste(BinomiNode a, BinomiNode b) {
         if (a == null) {
             return b;
         } else if (b == null) {
@@ -64,9 +64,9 @@ public class Binomikeko implements Keko {
         }
     }
 
-    private TreeNode BinomiMerge(Binomikeko ha, Binomikeko hb) {
-        TreeNode a = ha.head;
-        TreeNode b = hb.head;
+    private BinomiNode BinomiMerge(Binomikeko ha, Binomikeko hb) {
+        BinomiNode a = ha.head;
+        BinomiNode b = hb.head;
         ha.head = minAste(a, b);
         if (ha.head == null) {
             return null;
@@ -82,7 +82,7 @@ public class Binomikeko implements Keko {
             } else if (a.getSisar().getAste() < b.getAste()) {
                 a = a.getSisar();
             } else {
-                TreeNode c = b.getSisar();
+                BinomiNode c = b.getSisar();
                 b.setSisar(a.getSisar());
                 a.setSisar(b);
                 a = a.getSisar();
@@ -98,9 +98,9 @@ public class Binomikeko implements Keko {
         if (this.head == null) {
             return;
         }
-        TreeNode prevX = null;
-        TreeNode x = this.head;
-        TreeNode nextX = x.getSisar();
+        BinomiNode prevX = null;
+        BinomiNode x = this.head;
+        BinomiNode nextX = x.getSisar();
         while (nextX != null) {
             if (x.getAste() != nextX.getAste() || (nextX.getSisar() != null && nextX.getSisar().getAste() == x.getAste())) {
                 prevX = x;
@@ -129,11 +129,11 @@ public class Binomikeko implements Keko {
     }
 
     private void extractMin() { //extract-Min
-        TreeNode minEd = null;
+        BinomiNode minEd = null;
         int min = Integer.MAX_VALUE;
         Binomikeko tmp = new Binomikeko();
-        TreeNode edellinen;
-        TreeNode i = this.head;
+        BinomiNode edellinen;
+        BinomiNode i = this.head;
         if (i == null) {
             return;
         }
@@ -149,7 +149,7 @@ public class Binomikeko implements Keko {
             i = i.getSisar();
         }
 
-        TreeNode poistettava;
+        BinomiNode poistettava;
         System.out.println("LISTANYT: " + this.toString());
         if (minEd == null) { // head on ainoa jolla ei isosiskoa
             poistettava = this.head;
@@ -159,14 +159,14 @@ public class Binomikeko implements Keko {
             minEd.setSisar(poistettava.getSisar());
         }
         
-        TreeNode l = poistettava.getlapsi();
+        BinomiNode l = poistettava.getlapsi();
         if(l == null) {
             return;
         }
         
         // on lapsia, yhdistetään ne
         while (l.getSisar() != null) {
-            TreeNode next = l.getSisar();
+            BinomiNode next = l.getSisar();
             l.setSisar(tmp.head);
             tmp.head = l;
             l = next;
@@ -177,19 +177,19 @@ public class Binomikeko implements Keko {
 
     }
 
-    private void poistaNode(TreeNode poistettava) {
+    private void poistaNode(BinomiNode poistettava) {
         pienennaArvo(poistettava, Integer.MIN_VALUE);
         extractMin();
     }
 
-    private void pienennaArvo(TreeNode x, int uusiArvo) {
+    private void pienennaArvo(BinomiNode x, int uusiArvo) {
         if (uusiArvo > x.getArvo()) {
             System.out.println("Uuden arvon tulee olla pienempi kuin nykyisen arvon");
             return;
         }
         x.setArvo(uusiArvo);
-        TreeNode y = x;
-        TreeNode z = y.getVanhempi();
+        BinomiNode y = x;
+        BinomiNode z = y.getVanhempi();
         while (z != null && y.getArvo() < z.getArvo()) {
             int yynArvo = y.getArvo(); //vaihdetaan arvot päittäin
             y.setArvo(z.getArvo());
@@ -202,7 +202,7 @@ public class Binomikeko implements Keko {
     @Override
     public void Insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
-        TreeNode keonEkapuu = new TreeNode(a);
+        BinomiNode keonEkapuu = new BinomiNode(a);
         uusikeko.head = keonEkapuu;
         yhdistaKeot(this, uusikeko);
     }
@@ -215,9 +215,9 @@ public class Binomikeko implements Keko {
         return getMinimiNode().getArvo();
     }
 
-    private TreeNode getMinimiNode() {
-        TreeNode y = null;
-        TreeNode minNode = this.head; //head
+    private BinomiNode getMinimiNode() {
+        BinomiNode y = null;
+        BinomiNode minNode = this.head; //head
         int min = Integer.MAX_VALUE;
         while (minNode != null) {
             System.out.println("mitä tapahtuu");
@@ -233,7 +233,7 @@ public class Binomikeko implements Keko {
     @Override
     public String toString() {
         String ret = "t ";
-        TreeNode i = this.head;
+        BinomiNode i = this.head;
         while (i != null) {
             ret += i.toString();
             i = i.getSisar();
