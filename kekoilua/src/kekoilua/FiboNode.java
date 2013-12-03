@@ -22,6 +22,9 @@ public class FiboNode {
     public void setArvo(int arvo){
         this.arvo = arvo;
     }
+    public void kasvataAstettaYhdella(){
+        this.aste++;
+    }
 
     public int getArvo(){
         return this.arvo;

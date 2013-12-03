@@ -24,16 +24,13 @@ public class FibonaccikekoTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("Delete");
-        Fibonaccikeko instance = new Fibonaccikeko();
-        instance.Delete();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keko.Insert(2);
+        keko.Insert(1);
+        keko.Delete();
+        assertEquals(2, keko.getYlin());
     }
 
-    /**
-     * Test of Insert method, of class Fibonaccikeko.
-     */
+   
     @Test
     public void testInsert() {
         System.out.println("Insert");
