@@ -68,43 +68,26 @@ public class Fibonaccikeko implements Keko {
         FiboNode eka = this.minRoot;
         FiboNode i = eka;
         if (i != null) {
-            FiboNode x = i;
-            int d = x.getAste();
-            while (asteet.get(d) != null) {
-                FiboNode y = (FiboNode) asteet.get(d); //miksei tämä palauta FiboNodea..
-                if (x.getArvo() > y.getArvo()) {
-                    //vaihda x ja y
-                    FiboNode safe = x;
-                    x = y;
-                    y = safe;
-                }//onkohan tässä iffin loppu..
-                heapLink(y, x);
-                asteet.set(d, null);
-                d++;
+            for (int j = 0; j <= this.nodeja; j++) {
+                FiboNode x = i;
+                int d = x.getAste();
+                while (asteet.get(d) != null) {
+                    FiboNode y = (FiboNode) asteet.get(d); //miksei tämä palauta FiboNodea..
+                    if (x.getArvo() > y.getArvo()) {
+                        //vaihda x ja y
+                        FiboNode safe = x;
+                        x = y;
+                        y = safe;
+                    }//onkohan tässä iffin loppu..
+                    heapLink(y, x);
+                    asteet.set(d, null);
+                    d++;
+                }
+                asteet.set(d, x);
+                i = i.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
             }
-            asteet.set(d, x);
-        }
-        i = i.getOikeaSisar();
-        while (i != eka) { //tehdään sama lopuillekin rootlistissä
-            FiboNode x = i;
-            int d = x.getAste();
-            while (asteet.get(d) != null) {
-                FiboNode y = (FiboNode) asteet.get(d); //miksei tämä palauta FiboNodea..
-                if (x.getArvo() > y.getArvo()) {
-                    //vaihda x ja y
-                    FiboNode safe = x;
-                    x = y;
-                    y = safe;
-                }//onkohan tässä iffin loppu..
-                heapLink(y, x);
-                asteet.set(d, null);
-                d++;
-            }
-            asteet.set(d, x);
-            i = i.getOikeaSisar(); //loopissa eteenpäin
         }
         this.minRoot = null;
-
         FiboNode ekataas = this.minRoot; //käydään rootlistin asteet taas läpi
         FiboNode o = this.minRoot;
         if (asteet.get(o.getAste()) != null) {
@@ -131,7 +114,6 @@ public class Fibonaccikeko implements Keko {
             }
             o = o.getOikeaSisar();
         }
-
     }
 
     private void heapLink(FiboNode y, FiboNode x) {
@@ -164,6 +146,7 @@ public class Fibonaccikeko implements Keko {
         x.setOikeaSisar(x);
         x.setMark(false);
         //konkatinoidaan this.rootlist ja rootlist jossa x...
+        //korjaapa tätä vielä..
         if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
             this.minRoot = x;
         } else {
