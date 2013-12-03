@@ -104,7 +104,6 @@ public class Binomikeko implements Keko {
         }
 
         BinomiNode poistettava;
-        System.out.println("LISTANYT: " + this.toString());
         if (minEd == null) { // head on ainoa jolla ei isosiskoa
             poistettava = this.head;
             this.head = poistettava.getSisar();
