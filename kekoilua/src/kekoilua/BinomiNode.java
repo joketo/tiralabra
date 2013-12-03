@@ -1,16 +1,12 @@
 
 package kekoilua;
 
-import java.util.LinkedList;
-import java.util.List;
-
-
 public class BinomiNode {
     private int arvo;
     private int aste;
     private BinomiNode vanhempi;
     private BinomiNode sisar;
-    private BinomiNode vasinLapsi;
+    private BinomiNode vasinLapsi; //vasemmanpuoleisin lapsi
     
     public BinomiNode(int juurenarvo){
         this.arvo = juurenarvo;
@@ -32,18 +28,20 @@ public class BinomiNode {
     }
     
     public void Yhdista(BinomiNode z){
-        System.out.println("testaus");
         this.vanhempi = z;
         this.sisar = z.getlapsi();
         z.setVasinLapsi(this);
         z.setAste(z.getAste()+1);
     }
+    
     public void setArvo(int newArvo){
         this.arvo = newArvo;
     }
+    
     public void setVanhempi(BinomiNode vanhempi){
         this.vanhempi = vanhempi;
     }
+    
     public void setAste(int aste){
         this.aste = aste;
     }
@@ -55,18 +53,23 @@ public class BinomiNode {
     public int getAste(){
         return aste;
     }
+    
     public BinomiNode getVanhempi(){
         return this.vanhempi;
     }
+    
     public BinomiNode getSisar(){
         return this.sisar;
     }
+    
     public BinomiNode getlapsi(){
         return this.vasinLapsi;
     }
+    
     public void setVasinLapsi(BinomiNode i){
         this.vasinLapsi = i;
     }
+    
     @Override
     public String toString(){
         if (this == null){
