@@ -4,8 +4,8 @@ package kekoilua;
 public class FiboNode {
     private FiboNode vanhus;
     private FiboNode lapsi;
-    private FiboNode vasenlapsi;
-    private FiboNode oikealapsi;
+    private FiboNode vasenSisar;
+    private FiboNode oikeaSisar;
     private int aste;
     private int arvo;
     private boolean mark;
@@ -42,23 +42,23 @@ public class FiboNode {
     }
 
  
-    public FiboNode getVasenlapsi() {
-        return vasenlapsi;
+    public FiboNode getVasenSisar() {
+        return vasenSisar;
     }
 
 
-    public void setVasenlapsi(FiboNode vasenlapsi) {
-        this.vasenlapsi = vasenlapsi;
-    }
-
- 
-    public FiboNode getOikealapsi() {
-        return oikealapsi;
+    public void setVasenSisar(FiboNode vasen) {
+        this.vasenSisar = vasen;
     }
 
  
-    public void setOikealapsi(FiboNode oikealapsi) {
-        this.oikealapsi = oikealapsi;
+    public FiboNode getOikeaSisar() {
+        return oikeaSisar;
+    }
+
+ 
+    public void setOikeaSisar(FiboNode oikea) {
+        this.oikeaSisar = oikea;
     }
 
 
