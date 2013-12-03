@@ -7,17 +7,25 @@ public class FiboNode {
     private FiboNode vasenlapsi;
     private FiboNode oikealapsi;
     private int aste;
-    //private int arvo;
+    private int arvo;
     private boolean mark;
     
-    public FiboNode(){
+    public FiboNode(int arvo){
         this.mark = false;
+        this.arvo = arvo;
+        this.aste = 0;
     }
 
     public FiboNode getVanhus() {
         return vanhus;
     }
+    public void setArvo(int arvo){
+        this.arvo = arvo;
+    }
 
+    public int getArvo(){
+        return this.arvo;
+    }
 
     public void setVanhus(FiboNode vanhus) {
         this.vanhus = vanhus;
