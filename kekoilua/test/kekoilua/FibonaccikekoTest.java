@@ -53,11 +53,7 @@ public class FibonaccikekoTest {
     @Test
     public void testGetYlin() {
         System.out.println("getYlin");
-        Fibonaccikeko instance = new Fibonaccikeko();
-        int expResult = 0;
-        int result = instance.getYlin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keko.Insert(4);
+        assertEquals(4, keko.getYlin());
     }
 }

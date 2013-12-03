@@ -24,12 +24,12 @@ public class Fibonaccikeko implements Keko {
         x.setVasenSisar(x);
         x.setOikeaSisar(x);
         x.setMark(false);
-        if(minRoot != null){
-           minRoot.setVasenSisar(x); 
-        }
-        //konkatinoi this.rootlist ja rootlist jossa x...
+        //konkatinoidaan this.rootlist ja rootlist jossa x...
         if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
             this.minRoot = x;
+        }
+        else{
+            minRoot.setVasenSisar(x);
         }
         nodeja++;
     }
