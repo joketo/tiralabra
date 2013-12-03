@@ -12,7 +12,38 @@ public class Fibonaccikeko implements Keko {
 
     @Override
     public void Delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FiboNode z = this.minRoot;
+        if (z != null) {
+            FiboNode x = z.getLapsi();
+            FiboNode ekalapsi = x;
+            if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
+                this.minRoot = x;
+            } else {
+                minRoot.setVasenSisar(x);
+            }
+            x.setVanhus(null); //lasten vanhemmaksi null
+            x = x.getOikeaSisar(); //
+            while (x != ekalapsi) { //laita kaikki lapset pinon rootlistiin, mennään kunnes lapset ympäri
+                if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
+                    this.minRoot = x;
+                } else {
+                    minRoot.setVasenSisar(x);
+                }
+                x.setVanhus(null);
+                x = x.getOikeaSisar();
+            }
+            //poista z rootlististä...
+            if (z == z.getOikeaSisar()) {
+                this.minRoot = null;
+            } else {
+                this.minRoot = x.getOikeaSisar();
+            }
+            consolidate();
+            this.nodeja--;
+        }
+    }
+
+    private void consolidate() {
     }
 
     @Override
@@ -27,11 +58,13 @@ public class Fibonaccikeko implements Keko {
         //konkatinoidaan this.rootlist ja rootlist jossa x...
         if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
             this.minRoot = x;
-        }
-        else{
+        } else {
             minRoot.setVasenSisar(x);
         }
         nodeja++;
+    }
+
+    private void yhdistaKeot(Fibonaccikeko B2) {
     }
 
     @Override
