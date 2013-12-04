@@ -98,32 +98,6 @@ public class Fibonaccikeko implements Keko {
                 }
             }
         }
-        /* FiboNode ekataas = this.minRoot; //käydään rootlistin asteet taas läpi
-         FiboNode o = this.minRoot;
-         if (asteet.get(o.getAste()) != null) {
-         FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
-         //lisätään asteet[o] rootlistiin
-         if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
-         this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
-         } else {
-         minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
-         minRoot.setVasenSisar(lisattava);
-         }
-         }
-         o = o.getOikeaSisar();
-         while (o != ekataas) { //tehdään tämä kauhistus lopuillekin
-         if (asteet.get(o.getAste()) != null) {
-         FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
-         //lisätään asteet[o] rootlistiin
-         if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
-         this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
-         } else {
-         minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
-         minRoot.setVasenSisar(lisattava);
-         }
-         }
-         o = o.getOikeaSisar();
-         }*/
     }
 
     private void lisaaRootListiin(FiboNode x) {
@@ -170,7 +144,6 @@ public class Fibonaccikeko implements Keko {
         x.setVasenSisar(x);
         x.setOikeaSisar(x);
         x.setMark(false);
-
         //konkatinoidaan this.rootlist ja rootlist jossa x
         if (minRoot == null) {
             minRoot = x;
