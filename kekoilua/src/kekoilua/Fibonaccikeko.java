@@ -54,7 +54,8 @@ public class Fibonaccikeko implements Keko {
          return asteet;
          }*/
         for (int i = 0; i < this.nodeja; i++) {
-            asteet.set(a.getAste(), null);
+            asteet.add(null);
+            //asteet.set(a.getAste(), null);
             a = a.getOikeaSisar();
         }
         return asteet;
@@ -84,33 +85,61 @@ public class Fibonaccikeko implements Keko {
                 i = i.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
             }
         }
+
+
         this.minRoot = null;
-        FiboNode ekataas = this.minRoot; //käydään rootlistin asteet taas läpi
-        FiboNode o = this.minRoot;
-        if (asteet.get(o.getAste()) != null) {
-            FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
-            //lisätään asteet[o] rootlistiin
-            if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
-                this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
-            } else {
-                minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
-                minRoot.setVasenSisar(lisattava);
-            }
-        }
-        o = o.getOikeaSisar();
-        while (o != ekataas) { //tehdään tämä kauhistus lopuillekin
-            if (asteet.get(o.getAste()) != null) {
-                FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
-                //lisätään asteet[o] rootlistiin
-                if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
-                    this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
-                } else {
-                    minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
-                    minRoot.setVasenSisar(lisattava);
+
+        for (int u = 0; u < nodeja; u++) {
+            if (asteet.get(u) != null) {
+                FiboNode nyk = (FiboNode)asteet.get(u);
+                //lisää asteet[u] rootlistiin
+                this.lisaaRootListiin(nyk);
+                if(minRoot == null || nyk.getArvo() < minRoot.getArvo()){
+                    minRoot = nyk;
                 }
             }
-            o = o.getOikeaSisar();
         }
+        /* FiboNode ekataas = this.minRoot; //käydään rootlistin asteet taas läpi
+         FiboNode o = this.minRoot;
+         if (asteet.get(o.getAste()) != null) {
+         FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
+         //lisätään asteet[o] rootlistiin
+         if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
+         this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
+         } else {
+         minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
+         minRoot.setVasenSisar(lisattava);
+         }
+         }
+         o = o.getOikeaSisar();
+         while (o != ekataas) { //tehdään tämä kauhistus lopuillekin
+         if (asteet.get(o.getAste()) != null) {
+         FiboNode lisattava = (FiboNode) asteet.get(o.getAste()); //miksei suoraan FiboNode..
+         //lisätään asteet[o] rootlistiin
+         if (this.minRoot == null || lisattava.getArvo() < this.minRoot.getArvo()) {
+         this.minRoot = lisattava; //pitäisköhän täälläkin asettaa siskot oikein
+         } else {
+         minRoot.getVasenSisar().setOikeaSisar(lisattava); //turhaakohan?
+         minRoot.setVasenSisar(lisattava);
+         }
+         }
+         o = o.getOikeaSisar();
+         }*/
+    }
+
+    private void lisaaRootListiin(FiboNode x) {
+        if (minRoot == null) {
+            minRoot = x;
+        } else {
+            minRoot.getOikeaSisar().setVasenSisar(x);
+            x.setOikeaSisar(minRoot.getOikeaSisar());
+            minRoot.setOikeaSisar(x);
+            x.setVasenSisar(minRoot);
+        }
+        /*if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
+            this.minRoot = x;
+        }*/
+        nodeja++;
     }
 
     private void heapLink(FiboNode y, FiboNode x) {

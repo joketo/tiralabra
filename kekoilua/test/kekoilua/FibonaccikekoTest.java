@@ -28,6 +28,7 @@ public class FibonaccikekoTest {
         keko.Insert(1);
         System.out.println(keko.toString());
         keko.Delete();
+        System.out.println(keko.toString());
         assertEquals(2, keko.getYlin());
     }
 
@@ -44,8 +45,9 @@ public class FibonaccikekoTest {
         keko.Insert(4);
         keko.Insert(5);
         keko.Insert(6);
-        keko.Insert(1);
-        assertEquals(1, keko.getYlin());
+        keko.Insert(7);
+        System.out.println(keko.toString());
+        assertEquals(4, keko.getYlin());
     } 
     
     @Test
