@@ -22,10 +22,12 @@ public class FibonaccikekoTest {
     /**
      * Test of Delete method, of class Fibonaccikeko.
      */
+    
     @Test
     public void testDelete() {
         keko.Insert(2);
         keko.Insert(1);
+        keko.Insert(3);
         System.out.println(keko.toString());
         keko.Delete();
         System.out.println(keko.toString());

@@ -13,6 +13,7 @@ public class Kekoilua {
         for (int i = 1; i <= 100; i++) {
             binaarikeko.Insert(i);
         }
+
         System.out.println("binomikekoon 100 alkiota");
         for (int i = 1; i <= 100; i++) {
             binomikeko.Insert(i);
@@ -21,6 +22,13 @@ public class Kekoilua {
         for (int i = 1; i <= 100; i++) {
             fibonaccikeko.Insert(i);
         }
+        System.out.println("binäärikeon keon ylin");
+        System.out.println(binaarikeko.getYlin());
+        System.out.println("binomikeon ylin");
+        System.out.println(binomikeko.getYlin());
+        System.out.println("fibonaccikeon ylin");
+        System.out.println(fibonaccikeko.getYlin());
+
         System.out.println("");
         System.out.println("GETMIN:\nbinäärikeosta otetaan keon ylin");
         System.out.println(binaarikeko.getYlin());
@@ -36,6 +44,8 @@ public class Kekoilua {
         System.out.println("binomikeosta poistetaan ylin alkio");
         binomikeko.Delete();
         System.out.println("ylin nyt:\n" + binomikeko.getYlin());
-
+        System.out.println("fibonaccikeosta poistetaan ylin alkio");
+        fibonaccikeko.Delete();
+        System.out.println("ylin nyt:\n" + fibonaccikeko.getYlin());
     }
 }
