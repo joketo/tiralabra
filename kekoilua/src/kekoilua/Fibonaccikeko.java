@@ -16,16 +16,8 @@ public class Fibonaccikeko implements Keko {
         if (z != null) {
             FiboNode x = z.getLapsi();
             if (x != null) {
-                for (int i = 0; i < this.nodeja; i++) { // lisää kaikki x:n lapset rootlistiin
-                    if (minRoot == null) {
-                        minRoot = x;
-                    } else {
-                        minRoot.getOikeaSisar().setVasenSisar(x);
-                        x.setOikeaSisar(minRoot.getOikeaSisar());
-                        minRoot.setOikeaSisar(x);
-                        x.setVasenSisar(minRoot);
-
-                    }
+                for (int i = 0; i < this.nodeja; i++) { // lisää kaikki x:n lapset rootlistiin                    
+                    this.lisaaRootListiin(x);
                     if (this.minRoot == null || x.getArvo() < this.minRoot.getArvo()) {
                         this.minRoot = x;
                     }
@@ -42,7 +34,14 @@ public class Fibonaccikeko implements Keko {
                 }
                 a = a.getOikeaSisar();
             }
-            consolidate();
+            if(z == z.getOikeaSisar()){
+                this.minRoot = null;
+                
+            }else{
+                minRoot = z.getOikeaSisar();
+                consolidate();
+            }
+            
             this.nodeja--;
         }
     }
