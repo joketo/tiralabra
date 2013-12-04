@@ -65,7 +65,7 @@ public class Fibonaccikeko implements Keko {
         }
 
         double koko = Math.log(nodeja) / Math.log(2) + 1;
-        asteet = new FiboNode[(int) koko+1];
+        asteet = new FiboNode[(int) koko + 1];
         for (int i = 0; i < koko; i++) {
             // asteet.add(null);
             asteet[a.getAste()] = null;
@@ -78,29 +78,38 @@ public class Fibonaccikeko implements Keko {
         FiboNode[] asteet = alustaAstelista();
         FiboNode i = this.minRoot;
         FiboNode eka = this.minRoot;
-        if (i != null) { //jokaiselle rootlistin nodelle i
-            do {
-                FiboNode x = i;
-                int d = x.getAste();
-                while (asteet[d] != null) {
-                    FiboNode y = asteet[d];
-                    if (x.getArvo() > y.getArvo()) {
-                        //vaihda x ja y
-                        FiboNode safe = x;
-                        x = y;
-                        y = safe;
-                    }
-                    heapLink(y, x);
-                    asteet[d] = null;
-                    d++;
+        if (i == null) {
+            return;
+        }
+        // if (i != null) { //jokaiselle rootlistin nodelle i
+        do {
+            FiboNode x = i;
+            int d = x.getAste();
+            while (asteet[d] != null) {
+                FiboNode y = asteet[d];
+                if (x.getArvo() > y.getArvo()) {
+                    //vaihda x ja y
+                    FiboNode safe = x;
+                    x = y;
+                    y = safe;
+                }
+                heapLink(y, x);
+                for (int k = 0; k < asteet.length; k++) {
+                    System.out.println(asteet[k]);
+                }
+                asteet[d] = null;
+
+                d++;
+                if (d > asteet.length) {
+
                     System.out.println("astetaulukkosize" + asteet.length + " nodet " + nodeja + " d: " + d);
 
                 }
                 asteet[d] = x;
                 i = i.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
-            } while (i != eka);
-        }
+            }
 
+        } while (i != eka);
         this.minRoot = null;
         for (int u = 0; u < nodeja; u++) {
             if (asteet[u] != null) {
@@ -144,8 +153,18 @@ public class Fibonaccikeko implements Keko {
             a = a.getOikeaSisar();
         } while (a != eka);
         y.setVanhus(x); //yystä x:n lapsi
-        x.setLapsi(y);
-        x.kasvataAstettaYhdella();
+        if (x.getLapsi() == null) {
+            x.setLapsi(y);
+            y.setOikeaSisar(null);
+            y.setVasenSisar(null);
+            x.kasvataAstettaYhdella(); //tartteeko tätä tehdä elsessä?
+        } else { // aseta x:n lapset osoittamaan oikein
+            FiboNode xvasenlapsi = x.getLapsi().getVasenSisar();
+            FiboNode xoikealapsi = x.getLapsi().getOikeaSisar();
+            xvasenlapsi.getOikeaSisar().setVasenSisar(y);
+            xoikealapsi.getVasenSisar().setOikeaSisar(y);
+            //   x.setLapsi(y);
+        }
         y.setMark(false);
     }
 

@@ -83,7 +83,7 @@ public class FiboNode {
         this.mark = mark;
     }
     public String toString(){
-        String r = ("aste: "+ this.aste + " arvo: "+  this.arvo + " lapsi: " + this.lapsi);
+        String r = ("aste: "+ this.aste + " arvo: "+  this.arvo + " lapsi: ");
         return r;
     }
 }
