@@ -82,5 +82,8 @@ public class FiboNode {
     public void setMark(boolean mark) {
         this.mark = mark;
     }
-    
+    public String toString(){
+        String r = ("aste: "+ this.aste + " arvo: "+  this.arvo + " lapsi: " + this.lapsi);
+        return r;
+    }
 }

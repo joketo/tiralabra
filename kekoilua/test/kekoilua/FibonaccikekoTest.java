@@ -26,6 +26,7 @@ public class FibonaccikekoTest {
     public void testDelete() {
         keko.Insert(2);
         keko.Insert(1);
+        System.out.println(keko.toString());
         keko.Delete();
         assertEquals(2, keko.getYlin());
     }
