@@ -75,6 +75,6 @@ public class BinomiNode {
         if (this == null){
             return "tyhjä";
         }
-        return "aste: " + this.aste +" arvo: "+ this.arvo +")\n";
+        return "aste: " + this.aste +" arvo: "+ this.arvo +"\n";
     }
 }
