@@ -22,7 +22,7 @@ public class BinomikekoTest {
        }
        keko.Delete();
        assertEquals(2, keko.getYlin());
-    }/*
+    }
     @Test
     public void toimiikoUudenKeonLuonti() {
         keko.Insert(4);
@@ -75,5 +75,5 @@ public class BinomikekoTest {
         System.out.println(keko.toString());
         assertEquals(1, keko.getYlin());
 
-    }*/
+    }
 }

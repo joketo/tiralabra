@@ -23,7 +23,6 @@ public class Binomikeko implements Keko {
     private void BinomiMerge(Binomikeko hb) {
         BinomiNode a = this.head;
         BinomiNode b = hb.head;
-        
         this.head = minAste(a, b);
         if (this.head == null) {
             return;
@@ -78,8 +77,7 @@ public class Binomikeko implements Keko {
 
     @Override
     public void Delete() {
-        extractMin();
-        // poistaNode(this.getMinimiNode());
+        extractMin(); // poistaNode(this.getMinimiNode());
     }
 
     private void extractMin() { //extract-Min
@@ -93,15 +91,14 @@ public class Binomikeko implements Keko {
         }
 
         edellinen = null;
-        while (i.getSisar() != null) {
+        do {
             if (i.getArvo() <= min) {
                 min = i.getArvo();
                 minEd = edellinen;
             }
-
             edellinen = i;
             i = i.getSisar();
-        }
+        } while (i != null);
 
         BinomiNode poistettava;
         if (minEd == null) { // head on ainoa jolla ei isosiskoa
@@ -116,7 +113,6 @@ public class Binomikeko implements Keko {
         if (l == null) {
             return;
         }
-
         // on lapsia, yhdistetään ne
         while (l.getSisar() != null) {
             BinomiNode next = l.getSisar();
@@ -193,24 +189,4 @@ public class Binomikeko implements Keko {
         return ret;
     }
 
-    public static void main(String[] args) {
-        Binomikeko keko = new Binomikeko();
-        keko.Insert(11);
-        keko.Insert(1);
-        keko.Insert(2);
-        keko.Insert(3);
-        keko.Insert(4);
-        keko.Insert(5);
-        keko.Insert(6);
-        keko.Insert(7);
-        keko.Insert(9);
-        keko.Insert(10);
- 
-        System.out.println(keko.getYlin());
-        System.out.println(keko.toString());
-        keko.Delete();
-                System.out.println(keko.toString());
-
-        System.out.println(keko.getYlin());
-    }
 }
