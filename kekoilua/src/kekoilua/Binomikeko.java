@@ -20,21 +20,22 @@ public class Binomikeko implements Keko {
         }
     }
 
-    private BinomiNode BinomiMerge(Binomikeko ha, Binomikeko hb) {
-        BinomiNode a = ha.head;
+    private void BinomiMerge(Binomikeko hb) {
+        BinomiNode a = this.head;
         BinomiNode b = hb.head;
-        ha.head = minAste(a, b);
-        if (ha.head == null) {
-            return null;
+        
+        this.head = minAste(a, b);
+        if (this.head == null) {
+            return;
         }
-        if (ha.head == b) {
+        if (this.head == b) {
             b = a;
         }
-        a = ha.head;
+        a = this.head;
         while (b != null) {
             if (a.getSisar() == null) {
                 a.setSisar(b);
-                return b;
+                return;
             } else if (a.getSisar().getAste() < b.getAste()) {
                 a = a.getSisar();
             } else {
@@ -45,11 +46,10 @@ public class Binomikeko implements Keko {
                 b = c;
             }
         }
-        return b;
     }
 
-    private void yhdistaKeot(Binomikeko a, Binomikeko b) {
-        BinomiMerge(a, b);
+    private void yhdistaKeot(Binomikeko b) {
+        BinomiMerge(b);
         if (this.head == null) {
             return;
         }
@@ -60,7 +60,7 @@ public class Binomikeko implements Keko {
             if (x.getAste() != nextX.getAste() || (nextX.getSisar() != null && nextX.getSisar().getAste() == x.getAste())) {
                 prevX = x;
                 x = nextX;
-            } else if (x.getArvo() <= nextX.getArvo()) {
+            } else if (x.getArvo() <= nextX.getArvo()) { //x:n ja nextx:n asteet samat
                 x.setSisar(nextX.getSisar());
                 nextX.Yhdista(x);
             } else {
@@ -126,7 +126,7 @@ public class Binomikeko implements Keko {
         }
         l.setSisar(tmp.head);
         tmp.head = l;
-        this.yhdistaKeot(this, tmp);
+        this.yhdistaKeot(tmp);
 
     }
 
@@ -157,7 +157,7 @@ public class Binomikeko implements Keko {
         Binomikeko uusikeko = new Binomikeko();
         BinomiNode keonEkapuu = new BinomiNode(a);
         uusikeko.head = keonEkapuu;
-        yhdistaKeot(this, uusikeko);
+        yhdistaKeot(uusikeko);
     }
 
     @Override
@@ -191,5 +191,26 @@ public class Binomikeko implements Keko {
             i = i.getSisar();
         }
         return ret;
+    }
+
+    public static void main(String[] args) {
+        Binomikeko keko = new Binomikeko();
+        keko.Insert(11);
+        keko.Insert(1);
+        keko.Insert(2);
+        keko.Insert(3);
+        keko.Insert(4);
+        keko.Insert(5);
+        keko.Insert(6);
+        keko.Insert(7);
+        keko.Insert(9);
+        keko.Insert(10);
+ 
+        System.out.println(keko.getYlin());
+        System.out.println(keko.toString());
+        keko.Delete();
+                System.out.println(keko.toString());
+
+        System.out.println(keko.getYlin());
     }
 }
