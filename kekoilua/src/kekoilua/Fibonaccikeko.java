@@ -49,85 +49,65 @@ public class Fibonaccikeko implements Keko {
             if (z == z.getOikeaSisar()) {
                 this.minRoot = null;
             } else {
+                System.out.println("tst");
                 minRoot = z.getOikeaSisar();
                 consolidate();
             }
             this.nodeja--;
         }
     }
-    /*
-     private KasvavaArray<FiboNode> alustaAstelista() {
-     KasvavaArray<FiboNode> asteet = new KasvavaArray<>();
-     FiboNode a = this.minRoot;
-     if (a == null) {
-     return asteet;
-     }
-     for (int i = 0; i < this.nodeja; i++) {
-     asteet.add(null);
-     //asteet.set(a.getAste(), null);
-     a = a.getOikeaSisar();
-     }
-     return asteet;
-     }*/
 
-    private ArrayList<FiboNode> alustaAstelista() {
-        ArrayList<FiboNode> asteet = new ArrayList<>();
+    private FiboNode[] alustaAstelista() {
+        FiboNode[] asteet = null;
         FiboNode a = this.minRoot;
         if (a == null) {
             return asteet;
         }
-        int suurinAste = 0;
-        for (int i = 0; i < this.nodeja; i++) {
-            if (a.getAste() > suurinAste) {
-                suurinAste = a.getAste();
-            }
-            a = a.getOikeaSisar();
-        }
-        for (int i = 0; i < suurinAste; i++) {
+
+        double koko = Math.log(nodeja) / Math.log(2) + 1;
+        asteet = new FiboNode[(int) koko+1];
+        for (int i = 0; i < koko; i++) {
             // asteet.add(null);
-            asteet.set(a.getAste(), null);
+            asteet[a.getAste()] = null;
             a = a.getOikeaSisar();
         }
         return asteet;
     }
 
     private void consolidate() {
-        //KasvavaArray<FiboNode> asteet = alustaAstelista();
-       // ArrayList<FiboNode> asteet = alustaAstelista();
-        //FiboNode eka = this.minRoot;
-        FiboNode[] asteet = new FiboNode[];
-        System.out.println("TEST ASTEET2:" + asteet.toString() + "\n");
-
+        FiboNode[] asteet = alustaAstelista();
         FiboNode i = this.minRoot;
-        if (i != null) {
-            for (int j = 0; j < this.nodeja; j++) {
+        FiboNode eka = this.minRoot;
+        if (i != null) { //jokaiselle rootlistin nodelle i
+            do {
                 FiboNode x = i;
                 int d = x.getAste();
-                while (asteet.get(d) != null) {
-                    FiboNode y = (FiboNode) asteet.get(d); //miksei tämä palauta FiboNodea..
+                while (asteet[d] != null) {
+                    FiboNode y = asteet[d];
                     if (x.getArvo() > y.getArvo()) {
                         //vaihda x ja y
                         FiboNode safe = x;
                         x = y;
                         y = safe;
-                    }//onkohan tässä iffin loppu..
+                    }
                     heapLink(y, x);
-                    asteet.set(d, null);
+                    asteet[d] = null;
                     d++;
+                    System.out.println("astetaulukkosize" + asteet.length + " nodet " + nodeja + " d: " + d);
+
                 }
-                asteet.set(d, x);
+                asteet[d] = x;
                 i = i.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
-            }
+            } while (i != eka);
         }
-        System.out.println("TEST ASTEET:" + asteet.toString() + "\n");
+
         this.minRoot = null;
         for (int u = 0; u < nodeja; u++) {
-            if (asteet.get(u) != null) {
-                FiboNode nyk = asteet.get(u);
+            if (asteet[u] != null) {
                 //lisää asteet[u] rootlistiin
-                this.lisaaRootListiin(nyk);
-                if (minRoot == null || nyk.getArvo() < minRoot.getArvo()) {
-                    minRoot = nyk;
+                this.lisaaRootListiin(asteet[u]);
+                if (minRoot == null || asteet[u].getArvo() < minRoot.getArvo()) {
+                    minRoot = asteet[u];
                 }
             }
         }
@@ -153,15 +133,16 @@ public class Fibonaccikeko implements Keko {
             return;
         }
         //etsi y rootlististä ja poista se
+        FiboNode eka = this.minRoot;
         FiboNode a = this.minRoot;
-        for (int i = 0; i < this.nodeja; i++) {
+        do {
             if (a == y) {
                 a.getVasenSisar().setOikeaSisar(a.getOikeaSisar());
                 a.getOikeaSisar().setVasenSisar(a.getVasenSisar());
-                this.nodeja--;
+                break;
             }
             a = a.getOikeaSisar();
-        }
+        } while (a != eka);
         y.setVanhus(x); //yystä x:n lapsi
         x.setLapsi(y);
         x.kasvataAstettaYhdella();

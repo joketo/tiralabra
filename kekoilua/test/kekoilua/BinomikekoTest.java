@@ -15,7 +15,14 @@ public class BinomikekoTest {
     public void setUp() {
         keko = new Binomikeko();
     }
-
+    @Test
+    public void toimiikoDeletejosIsoKeko(){
+       for (int i = 1; i <= 50; i++){
+           keko.Insert(i);
+       }
+       keko.Delete();
+       assertEquals(2, keko.getYlin());
+    }
     @Test
     public void toimiikoUudenKeonLuonti() {
         keko.Insert(4);
