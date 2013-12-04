@@ -34,7 +34,7 @@ public class FibonaccikekoTest {
         assertEquals(2, keko.getYlin());
     }
 
-   
+   /*
     @Test
     public void testInsert() {
         System.out.println("Insert");
@@ -57,5 +57,5 @@ public class FibonaccikekoTest {
         System.out.println("getYlin");
         keko.Insert(4);
         assertEquals(4, keko.getYlin());
-    }
+    }*/
 }
