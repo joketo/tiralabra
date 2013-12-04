@@ -51,7 +51,8 @@ public class KasvavaArray<T> implements List {
     public boolean add(Object o) {
         if (viimeisenIndeksi == lista.length - 1) {
             Object[] kopio = Arrays.copyOf(lista, lista.length * 2);
-            kopio[kopio.length] = o;
+            kopio[viimeisenIndeksi+1] = o;
+            viimeisenIndeksi++;
             this.lista = kopio;
         } else {
             lista[viimeisenIndeksi + 1] = o;
