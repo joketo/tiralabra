@@ -6,8 +6,7 @@ public class Kekoilua {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_BLUE = "\u001B[34m";
-    
-    
+
     public static void main(String[] args) {
         //TODO, binäärikekokin minimikeoksi, on nyt maksimi
 
@@ -20,6 +19,7 @@ public class Kekoilua {
         testaa(10000, 2);
         testaa(100000, 3);
         testaa(1000000, 4);
+        testaa(3000000, 5);
     }
 
     public static void testaa(long n, int monesko) {
@@ -28,7 +28,7 @@ public class Kekoilua {
         Binomikeko binomikeko = new Binomikeko();
         Binaarikeko binaarikeko = new Binaarikeko();
         Fibonaccikeko fibonaccikeko = new Fibonaccikeko();
-        System.out.println("\nINSERT:\nlisätään kekoihin "+n+" alkiota: ");
+        System.out.println("\nINSERT:\nlisätään kekoihin " + n + " alkiota: ");
         startTime = System.currentTimeMillis();
         for (int i = 1; i <= n; i++) {
             binaarikeko.Insert(i);
@@ -73,19 +73,38 @@ public class Kekoilua {
         System.out.println("poistetaan keoista ylin alkio");
         binaarikeko.Delete();
         timenow = System.currentTimeMillis();
-        System.out.println("Binäärikeko: " + ANSI_RED +  (timenow - startTime) + " millisekuntia");
+        System.out.println("Binäärikeko: ");
+        System.out.println(ANSI_RED + (timenow - startTime) + " millisekuntia");
 
         startTime = System.currentTimeMillis();
-       // System.out.println("binomikeko");
         binomikeko.Delete();
         timenow = System.currentTimeMillis();
-        System.out.println( "Binomikeko: " +  ANSI_GREEN +(timenow - startTime) + " millisekuntia");
+        System.out.println("Binomikeko:");
+        System.out.println(ANSI_GREEN + (timenow - startTime) + " millisekuntia");
 
+        System.out.println("Fibonaccikeon poiston aika vaihtelee, poistetaan näytöksi useampi alkio:");
         startTime = System.currentTimeMillis();
-       // System.out.println("fibonaccikeko");
         fibonaccikeko.Delete();
         timenow = System.currentTimeMillis();
-        System.out.println( "Fibonaccikeko " + ANSI_BLUE + (timenow - startTime) + " millisekuntia");
+        System.out.println("Fibonaccikeko 1.poisto:");
+        System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia");
+        
+        startTime = System.currentTimeMillis();
+        fibonaccikeko.Delete();
+        timenow = System.currentTimeMillis();
+        System.out.println("Fibonaccikeko 2.poisto:");
+        System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia");
+        
+        startTime = System.currentTimeMillis();
+        fibonaccikeko.Delete();
+        timenow = System.currentTimeMillis();
+        System.out.println("Fibonaccikeko 3.poisto:");
+        System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia");
+        
+        startTime = System.currentTimeMillis();
+        fibonaccikeko.Delete();
+        timenow = System.currentTimeMillis();
+        System.out.println("Fibonaccikeko 4.poisto:");
+        System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia");   
     }
-
 }
