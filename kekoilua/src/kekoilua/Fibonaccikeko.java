@@ -1,5 +1,7 @@
 package kekoilua;
 
+import java.util.EmptyStackException;
+
 
 public class Fibonaccikeko implements Keko {
 
@@ -12,7 +14,11 @@ public class Fibonaccikeko implements Keko {
     }
 
     @Override
-    public void Delete() {
+    public int Delete() {
+        int pieninArvo = minRoot.getArvo(); //palautusta varten
+        if(minRoot == null){
+            throw new EmptyStackException();
+        }
         FiboNode z = this.minRoot;
         if (z != null) {
             FiboNode x = z.getLapsi();
@@ -51,6 +57,7 @@ public class Fibonaccikeko implements Keko {
             }
             this.nodeja--;
         }
+        return pieninArvo;
     }
 
     private FiboNode[] alustaAstelista() {

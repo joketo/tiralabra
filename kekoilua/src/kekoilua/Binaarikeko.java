@@ -1,6 +1,7 @@
 package kekoilua;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 
 public class Binaarikeko implements Keko{
@@ -20,17 +21,17 @@ public class Binaarikeko implements Keko{
     private void Heapify(int i) {
         int vasenI = (2 * i) +1;
         int oikeaI = (2 * i) +2;
-        int suurin = i;
+        int pienin = i;
 
-        if (vasenI < keko.size() && keko.get(vasenI) > keko.get(suurin)) {
-            suurin = vasenI;
+        if (vasenI < keko.size() && keko.get(vasenI) < keko.get(pienin)) {
+            pienin = vasenI;
         }
-        if (oikeaI < keko.size() && keko.get(oikeaI) > keko.get(suurin)) {
-            suurin = oikeaI;
+        if (oikeaI < keko.size() && keko.get(oikeaI) < keko.get(pienin)) {
+            pienin = oikeaI;
         }
-        if (suurin != i) {
-            VaihdaArvotKeskenaan(suurin, i);
-            Heapify(suurin);
+        if (pienin != i) {
+            VaihdaArvotKeskenaan(pienin, i);
+            Heapify(pienin);
         }
     }
 
@@ -48,7 +49,7 @@ public class Binaarikeko implements Keko{
         }
         int vanhemmanIndeksi = (keko.size()-2) /2;
         int alkionIndeksi = keko.size()-1;
-        while (keko.get(vanhemmanIndeksi) < alkio && vanhemmanIndeksi >= 0) { //vanhemman kuuluisi olla lasta suurempi
+        while (keko.get(vanhemmanIndeksi) > alkio && vanhemmanIndeksi >= 0) { //vanhemman kuuluisi olla lasta suurempi
             VaihdaArvotKeskenaan(vanhemmanIndeksi, alkionIndeksi);
             alkionIndeksi = vanhemmanIndeksi;
             vanhemmanIndeksi = (vanhemmanIndeksi-1)/2;
@@ -64,17 +65,18 @@ public class Binaarikeko implements Keko{
     }
 
     @Override
-    public void Delete() { //poistaa keon huipun
+    public int Delete() { //poistaa keon huipun
+        int poistettava = getYlin();
         if(keko.isEmpty()){
-            return;
+            throw new EmptyStackException();
         }
         if(keko.size() == 1){
             keko.remove(0);
-            return;
+            return poistettava;
         }
         VaihdaArvotKeskenaan(0, (keko.size()-1));
         keko.remove(keko.size()-1); //huippu nyt viimeisenä, poistetaan
         Heapify(0);
-        
+        return poistettava;
     }
 }

@@ -1,5 +1,7 @@
 package kekoilua;
 
+import java.util.EmptyStackException;
+
 public class Binomikeko implements Keko {
 
     private BinomiNode head;
@@ -76,20 +78,19 @@ public class Binomikeko implements Keko {
     }
 
     @Override
-    public void Delete() {
-        extractMin(); // poistaNode(this.getMinimiNode());
+    public int Delete() {
+        return extractMin(); // poistaNode(this.getMinimiNode());
     }
 
-    private void extractMin() { //extract-Min
+    private int extractMin() { //extract-Min
         BinomiNode minEd = null;
         int min = Integer.MAX_VALUE;
         Binomikeko tmp = new Binomikeko();
         BinomiNode edellinen;
         BinomiNode i = this.head;
         if (i == null) {
-            return;
+            throw new EmptyStackException();
         }
-
         edellinen = null;
         do {
             if (i.getArvo() <= min) {
@@ -99,7 +100,8 @@ public class Binomikeko implements Keko {
             edellinen = i;
             i = i.getSisar();
         } while (i != null);
-
+        
+        
         BinomiNode poistettava;
         if (minEd == null) { // head on ainoa jolla ei isosiskoa
             poistettava = this.head;
@@ -111,7 +113,7 @@ public class Binomikeko implements Keko {
 
         BinomiNode l = poistettava.getlapsi();
         if (l == null) {
-            return;
+            return min;
         }
         // on lapsia, yhdistetään ne
         while (l.getSisar() != null) {
@@ -123,7 +125,7 @@ public class Binomikeko implements Keko {
         l.setSisar(tmp.head);
         tmp.head = l;
         this.yhdistaKeot(tmp);
-
+        return min;
     }
 
     private void poistaNode(BinomiNode poistettava) {
