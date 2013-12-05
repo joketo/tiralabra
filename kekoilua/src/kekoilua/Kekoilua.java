@@ -14,6 +14,8 @@ public class Kekoilua {
 
     public static void main(String[] args) {
         //TODO, binäärikekokin minimikeoksi, on nyt maksimi
+        int montako = Integer.parseInt(args[0]);
+        
         Keko keko;
         System.out.println("Testataan kolmea kekoa:");
         System.out.println(ANSI_RED + "BINÄÄRIKEKO");
@@ -21,7 +23,7 @@ public class Kekoilua {
         System.out.println(ANSI_BLUE + "FIBONACCIKEKO");
         System.out.println(CLOSE);
         
-        System.out.println(ANSI_RED + "Binäärikeon testausta:"+ CLOSE);
+       /* System.out.println(ANSI_RED + "Binäärikeon testausta:"+ CLOSE);
         keko = new Binaarikeko();
         testaaJarjestamista(10, keko);
         
@@ -31,13 +33,14 @@ public class Kekoilua {
         
         System.out.println(ANSI_BLUE + "Fibonaccikeon testausta:"+ CLOSE);
         keko = new Binomikeko();
-        testaaJarjestamista(10, keko);
+        testaaJarjestamista(10, keko);*/
         
-        testaa(1000, 1);
-        testaa(10000, 2);
-        testaa(100000, 3);
-        testaa(1000000, 4);
-        testaa(3000000, 5);
+        testaa(montako, 1);
+       // testaa(1000, 1);
+       // testaa(10000, 2);
+       // testaa(100000, 3);
+       // testaa(1000000, 4);
+       // testaa(3000000, 5);
         System.out.println("\ntestit loppuvat tähän\n");
     }
     public static void testaaJarjestamista(long n, Keko keko){
@@ -67,8 +70,8 @@ public class Kekoilua {
         System.out.println("");
     }
 
-    public static void testaa(long n, int monesko) {
-        System.out.println("\n\n"+ ANSI_PURPLE+ monesko + ". osio\n" + n + " alkiota" + CLOSE);
+    public static void testaa(long n, int monesko) {//monesko + ". osio\n" +
+        System.out.println("\n\n"+ ANSI_PURPLE+  n + " alkiota" + CLOSE);
         long startTime;
         Binomikeko binomikeko = new Binomikeko();
         Binaarikeko binaarikeko = new Binaarikeko();
