@@ -1,6 +1,7 @@
 
 package kekoilua;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,8 +34,26 @@ public class FibonaccikekoTest {
         //System.out.println(keko.toString());
         assertEquals(2, keko.getYlin());
     }
-
+    
+    @Test
+    public void testDeleteIsollaKeolla(){
+        for(int i = 1; i < 101; i++){
+            keko.Insert(i);
+        }
+        keko.Delete();
+        assertEquals(2, keko.getYlin());
+    }
    
+    @Test
+    public void testDeleteRandomKeolla(){
+        Random r = new Random();
+        for(int i = 1; i < 101; i++){
+            keko.Insert(r.nextInt());
+        }
+        keko.Delete();
+        assertEquals(2, keko.getYlin());
+    }
+    
     @Test
     public void testInsert() {
         System.out.println("Insert");
@@ -44,12 +63,11 @@ public class FibonaccikekoTest {
 
     @Test
     public void testInsertUseammalla(){
-        keko.Insert(4);
-        keko.Insert(5);
-        keko.Insert(6);
-        keko.Insert(7);
-        System.out.println(keko.toString());
-        assertEquals(4, keko.getYlin());
+        for(int i = 1; i < 101; i++){
+            keko.Insert(i);
+        }
+     //   System.out.println(keko.toString());
+        assertEquals(1, keko.getYlin());
     } 
     
     @Test

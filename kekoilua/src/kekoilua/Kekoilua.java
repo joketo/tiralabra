@@ -13,16 +13,17 @@ public class Kekoilua {
     public static final String CLOSE = "\u001B[m"; //estetään värivuodot
 
     public static void main(String[] args) {
-        String syote = args[0];
+      //  String syote = args[0];
         int montako;
 
         Keko keko;
-        System.out.println("Testataan kolmea kekoa:");
+        System.out.println(ANSI_PURPLE + "TERVETULOA!" + CLOSE + "Testataan kolmea kekoa:");
         System.out.println(ANSI_RED + "BINÄÄRIKEKO");
         System.out.println(ANSI_GREEN + "BINOMIKEKO");
         System.out.println(ANSI_BLUE + "FIBONACCIKEKO");
         System.out.println(CLOSE);
-        long startTime;
+        testaa(9,1);
+/*
         if (syote.equals("binomi") || syote.equals("binääri") || syote.equals("fibonacci")) {
             montako = Integer.parseInt(args[1]);
             if (syote.equals("binomi")) {
@@ -41,16 +42,9 @@ public class Kekoilua {
                 testaaJarjestamista(montako, keko);
             }
         }
-        if(syote.equals("vertailu")){
+        if (syote.equals("vertailu")) {
             muodostaVertailu();
-        }
-
-        /*       
-         testaa(1000, 1);
-         testaa(10000, 2);
-         testaa(100000, 3);
-         testaa(1000000, 4);
-         testaa(3000000, 5);*/
+        }*/
         System.out.println("testit loppuvat tähän\n");
     }
 
@@ -86,35 +80,104 @@ public class Kekoilua {
         }
         System.out.println("");
     }
-    
-    public static void muodostaVertailu(){
-        
+
+    public static ArrayList<Integer> muodostaRandomArray(int n) {
+        ArrayList<Integer> a = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            a.add(rand.nextInt());
+        }
+        return a;
     }
 
-    public static void testaa(long n, int monesko) {//monesko + ". osio\n" +
+    public static void muodostaVertailu() {
+        Binaarikeko binaari;
+        Binomikeko binomi;
+        Fibonaccikeko fibo;
+        ArrayList<Integer> tuhat = muodostaRandomArray(1000);
+        ArrayList<Integer> ktuh = muodostaRandomArray(10000);
+        ArrayList<Integer> stuh = muodostaRandomArray(100000);
+        ArrayList<Integer> milli = muodostaRandomArray(1000000);
+
+        System.out.println("Insertin kesto millisekunneissa eri syötteillä");
+        System.out.println("Kaikkiin kekoihin lisätään samat randomgeneroidut luvut.");
+        System.out.println("Uudet keot luodaan jokaista n:ää kohden.\n");
+        System.out.println("  n      " + ANSI_RED + "binäärikeko    " + ANSI_GREEN + "binomikeko    " + ANSI_BLUE + "fibonaccikeko" + CLOSE);
+        binaari = new Binaarikeko();
+        binomi = new Binomikeko();
+        fibo = new Fibonaccikeko();
+        System.out.println("1000         " + testaaInsert(binaari, tuhat) + "ms           "
+                + testaaInsert(binomi, tuhat) + "ms             " + testaaInsert(fibo, tuhat) + "ms");
+        binaari = new Binaarikeko();
+        binomi = new Binomikeko();
+        fibo = new Fibonaccikeko();
+        System.out.println("10000        " + testaaInsert(binaari, ktuh) + "ms          "
+                + testaaInsert(binomi, ktuh) + "ms            " + testaaInsert(fibo, ktuh) + "ms");
+        binaari = new Binaarikeko();
+        binomi = new Binomikeko();
+        fibo = new Fibonaccikeko();
+        System.out.println("100000       " + testaaInsert(binaari, stuh) + "ms           "
+                + testaaInsert(binomi, stuh) + "ms            " + testaaInsert(fibo, stuh) + "ms");
+        binaari = new Binaarikeko();
+        binomi = new Binomikeko();
+        fibo = new Fibonaccikeko();
+        System.out.println("1000000      " + testaaInsert(binaari, milli) + "ms          "
+                + testaaInsert(binomi, milli) + "ms           " + testaaInsert(fibo, milli) + "ms");
+    }
+
+    public static long testaaInsert(Keko keko, ArrayList<Integer> a) {
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < a.size(); i++) {
+            keko.Insert(a.get(i));
+        }
+        long timenow = System.currentTimeMillis();
+        return (timenow - startTime);
+    }
+
+    public static long testaaDelete(Keko keko, int n) {
+        long startTime = System.currentTimeMillis();
+        for (int i = 1; i <= n; i++) {
+            keko.Delete();
+        }
+        long timenow = System.currentTimeMillis();
+        return timenow - startTime;
+    }
+
+    public long testaaGetmin(Keko keko, int n) {
+        long startTime = System.currentTimeMillis();
+        for (int i = 1; i <= n; i++) {
+            keko.getYlin();
+        }
+        long timenow = System.currentTimeMillis();
+        return timenow - startTime;
+    }
+
+    public static void testaa(int n, int monesko) {//monesko + ". osio\n" +
         System.out.println("\n\n" + ANSI_PURPLE + n + " alkiota" + CLOSE);
         long startTime;
+        ArrayList<Integer> a = muodostaRandomArray(n);
         Binomikeko binomikeko = new Binomikeko();
         Binaarikeko binaarikeko = new Binaarikeko();
         Fibonaccikeko fibonaccikeko = new Fibonaccikeko();
         System.out.println("\nINSERT:\nlisätään kekoihin " + n + " alkiota: ");
+        System.out.println(a.size());
         startTime = System.currentTimeMillis();
-        for (int i = 1; i <= n; i++) {
-            binaarikeko.Insert(i);
+        for (int i = 0; i < a.size(); i++) {
+            binaarikeko.Insert(a.get(i));
         }
         long timenow = System.currentTimeMillis();
         System.out.println(ANSI_RED + "aikaa meni " + (timenow - startTime) + " millisekuntia" + CLOSE);
 
         startTime = System.currentTimeMillis();
-        for (int i = 1; i <= n; i++) {
-            binomikeko.Insert(i);
+        for (int i = 0; i < a.size(); i++) {
+            binomikeko.Insert(a.get(i));
         }
         timenow = System.currentTimeMillis();
         System.out.println(ANSI_GREEN + "aikaa meni " + (timenow - startTime) + " millisekuntia" + CLOSE);
 
         startTime = System.currentTimeMillis();
-        for (int i = 1; i <= n; i++) {
-            fibonaccikeko.Insert(i);
+        for (int i = 0; i < a.size(); i++) {
+            fibonaccikeko.Insert(a.get(i));
         }
         timenow = System.currentTimeMillis();
         System.out.println(ANSI_BLUE + "aikaa meni " + (timenow - startTime) + " millisekuntia" + CLOSE);
