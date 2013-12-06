@@ -1,6 +1,8 @@
 
 package kekoilua;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,12 +48,19 @@ public class FibonaccikekoTest {
    
     @Test
     public void testDeleteRandomKeolla(){
+        ArrayList<Integer> a = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < 100; i++) {
+            a.add(rand.nextInt());
+        }
         Random r = new Random();
-        for(int i = 1; i < 101; i++){
-            keko.Insert(r.nextInt());
+        for(int i = 0; i < a.size(); i++){
+            keko.Insert(a.get(i));
         }
         keko.Delete();
-        assertEquals(2, keko.getYlin());
+        Collections.sort(a);
+        int pienin = a.get(1);
+        assertEquals(pienin, keko.getYlin());
     }
     
     @Test
