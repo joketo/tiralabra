@@ -18,33 +18,34 @@ public class BinomikekoTest {
     public void setUp() {
         keko = new Binomikeko();
     }
+
     @Test
-    public void toimiikoDeletejosIsoKeko(){
-       for (int i = 1; i <= 50; i++){
-           keko.insert(i);
-       }
-       keko.pop();
-       assertEquals(2, keko.getYlin());
+    public void toimiikoDeletejosIsoKeko() {
+        for (int i = 1; i <= 50; i++) {
+            keko.insert(i);
+        }
+        keko.pop();
+        assertEquals(2, keko.getYlin());
     }
-    
-        @Test
-    public void testDeleteRandomKeolla(){
+
+    @Test
+    public void testDeleteRandomKeolla() {
         ArrayList<Integer> a = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < 10000; i++) {
             a.add(rand.nextInt());
         }
         Random r = new Random();
-        for(int i = 0; i < a.size(); i++){
+        for (int i = 0; i < a.size(); i++) {
             keko.insert(a.get(i));
         }
         Collections.sort(a);
-        
-        for(int i = 0; i < a.size(); i++){
-            assertEquals((int)a.get(i), (int)keko.pop());
+
+        for (int i = 0; i < a.size(); i++) {
+            assertEquals((int) a.get(i), (int) keko.pop());
         }
-        
     }
+
     @Test
     public void toimiikoUudenKeonLuonti() {
         keko.insert(4);

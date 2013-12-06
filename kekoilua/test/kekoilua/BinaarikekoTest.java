@@ -1,6 +1,8 @@
 package kekoilua;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,7 +17,23 @@ public class BinaarikekoTest {
         keko = new Binaarikeko();
     }
 
+        @Test
+    public void testDeleteRandomKeolla() {
+        ArrayList<Integer> a = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < 10000; i++) {
+            a.add(rand.nextInt());
+        }
+        Random r = new Random();
+        for (int i = 0; i < a.size(); i++) {
+            keko.insert(a.get(i));
+        }
+        Collections.sort(a);
 
+        for (int i = 0; i < a.size(); i++) {
+            assertEquals((int) a.get(i), (int) keko.pop());
+        }
+    }
     @Test
     public void InsertToimiiKunKekoOnTyhja() {
         int alkio = 4;
@@ -28,17 +46,9 @@ public class BinaarikekoTest {
         keko.insert(1);
         keko.insert(3);
         keko.insert(5);
-        assertEquals(5, keko.getYlin());
+        assertEquals(1, keko.getYlin());
     }
 
-    /**
-     * Test of pop method, of class Binaarikeko.
-     */
-    @Test
-    public void DeleteToimiiKunKekoOnTyhja() {
-        keko.pop();
-        assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
-    }
     
     @Test
     public void DeleteToimiiKunKeossaYksiAlkio(){
@@ -54,13 +64,13 @@ public class BinaarikekoTest {
         keko.insert(2);
         keko.insert(1);
         keko.pop();
-        assertEquals(3, keko.getYlin());
+        assertEquals(2, keko.getYlin());
     }
     
     @Test
     public void GetYlinToimii(){
         keko.insert(3);
         keko.insert(5);
-        assertEquals(5, keko.getYlin());
+        assertEquals(3, keko.getYlin());
     }
 }
