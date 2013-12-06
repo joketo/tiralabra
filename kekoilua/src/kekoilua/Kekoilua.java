@@ -18,7 +18,7 @@ public class Kekoilua {
         int montako;
         if (syote.equals("binomi") || syote.equals("binääri") || syote.equals("fibonacci") || syote.equals("vertailu")) {
             Keko keko;
-            System.out.println("\n"+ANSI_YELLOW + "TERVETULOA! ＼（＾▽＾）／" + CLOSE + "\nTestataan kolmea kekoa:");
+            System.out.println("\n" + ANSI_YELLOW + "TERVETULOA! ＼（＾▽＾）／" + CLOSE + "\nTestataan kolmea kekoa:");
             System.out.println(ANSI_RED + "BINÄÄRIKEKO");
             System.out.println(ANSI_GREEN + "BINOMIKEKO");
             System.out.println(ANSI_BLUE + "FIBONACCIKEKO");
@@ -45,8 +45,7 @@ public class Kekoilua {
                 muodostaVertailu();
             }
             System.out.println("testit loppuvat tähän\n");
-        }
-        else{
+        } else {
             System.out.println("kirjoita keon nimi ja alkioiden lukumäärä, esim. binomi 1000\ntai kirjoita vertailu, jos haluat vertailutaulukon");
         }
 
@@ -88,6 +87,9 @@ public class Kekoilua {
         }
         System.out.println("");
     }
+    
+    public static ArrayList<Long> poistoAjat;
+    public static ArrayList<Long> gettiAjat;
 
     public static ArrayList<Integer> muodostaRandomArray(int n) {
         ArrayList<Integer> a = new ArrayList<>();
@@ -98,12 +100,55 @@ public class Kekoilua {
         return a;
     }
     
-    public static void tulostaInsertTaulukko(){
-        ArrayList<>
-        
-    }
-    //täällä on aika copypastea, kun aikamittauksen kanssa oli muuten ongelmia
     public static void muodostaVertailu() {
+        System.out.println(ANSI_RED+"HUOM! kaikki laskut tehdään Insertin ohella, siksi se saattaa jumittaa"+ CLOSE);
+        System.out.println("Ramdom-alkioita sisältävän ArrayListin luonti vaikuttaa tuloksiin jonkin verran\n");
+        tulostaInsertTaulukko();
+        System.out.println("");
+        tulostaGettiTaulukko();
+        System.out.println("");
+        tulostaDeleteTaulukko();
+    }
+    
+    public static void tulostaDeleteTaulukko(){        
+        System.out.println("Deleten kesto millisekunneissa eri syötemäärillä\n");
+        System.out.println("  n      " + ANSI_RED + "binäärikeko    " + ANSI_GREEN + "binomikeko    " + ANSI_BLUE + "fibonaccikeko" + CLOSE);
+        System.out.println("1000         " + poistoAjat.get(0) + "ms           "
+                + poistoAjat.get(1) + "ms             " + poistoAjat.get(2) + "ms");
+        System.out.println("10000        " + poistoAjat.get(3) + "ms           "
+                + poistoAjat.get(4) + "ms             " + poistoAjat.get(5) + "ms");
+        System.out.println("100000       " + poistoAjat.get(6) + "ms          "
+                + poistoAjat.get(7) + "ms             " + poistoAjat.get(8) + "ms");
+        System.out.println("200000       " + poistoAjat.get(9) + "ms           "
+                + poistoAjat.get(10) + "ms             " + poistoAjat.get(11) + "ms");
+        System.out.println("1000000      " + poistoAjat.get(12) + "ms         "
+                + poistoAjat.get(13) + "ms             " + poistoAjat.get(14) + "ms");
+        System.out.println("5000000      " + poistoAjat.get(15) + "ms        "
+                + poistoAjat.get(16) + "ms             " + poistoAjat.get(17) + "ms");
+    }
+    
+    public static void tulostaGettiTaulukko(){        
+        System.out.println("Minimin ottamisen kesto millisekunneissa eri syötemäärillä\n");
+        System.out.println("  n      " + ANSI_RED + "binäärikeko    " + ANSI_GREEN + "binomikeko    " + ANSI_BLUE + "fibonaccikeko" + CLOSE);
+        System.out.println("1000         " + gettiAjat.get(0) + "ms           "
+                + gettiAjat.get(1) + "ms             " + gettiAjat.get(2) + "ms");
+        System.out.println("10000        " + gettiAjat.get(3) + "ms           "
+                + gettiAjat.get(4) + "ms             " + gettiAjat.get(5) + "ms");
+        System.out.println("100000       " + gettiAjat.get(6) + "ms          "
+                + gettiAjat.get(7) + "ms             " + gettiAjat.get(8) + "ms");
+        System.out.println("200000       " + gettiAjat.get(9) + "ms           "
+                + gettiAjat.get(10) + "ms             " + gettiAjat.get(11) + "ms");
+        System.out.println("1000000      " + gettiAjat.get(12) + "ms         "
+                + gettiAjat.get(13) + "ms             " + gettiAjat.get(14) + "ms");
+        System.out.println("5000000      " + gettiAjat.get(15) + "ms        "
+                + gettiAjat.get(16) + "ms             " + gettiAjat.get(17) + "ms");
+    }
+    
+    
+    //VAROITUS!!! HIRVEÄÄ COPYPASTEA!!
+    public static void tulostaInsertTaulukko() {
+        poistoAjat = new ArrayList<>();
+        gettiAjat = new ArrayList<>();
         Binaarikeko binaari;
         Binomikeko binomi;
         Fibonaccikeko fibo;
@@ -113,12 +158,12 @@ public class Kekoilua {
         ArrayList<Integer> kaksistuh = muodostaRandomArray(200000);
         ArrayList<Integer> milli = muodostaRandomArray(1000000);
         ArrayList<Integer> viisimilli = muodostaRandomArray(5000000);
-        ArrayList<Integer> kty = muodostaRandomArray(10001);
 
         System.out.println("Insertin kesto millisekunneissa eri syötteillä");
         System.out.println("Kaikkiin kekoihin lisätään samat randomgeneroidut luvut.");
         System.out.println("Uudet keot luodaan jokaista n:ää kohden.\n");
         System.out.println("  n      " + ANSI_RED + "binäärikeko    " + ANSI_GREEN + "binomikeko    " + ANSI_BLUE + "fibonaccikeko" + CLOSE);
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
@@ -127,31 +172,120 @@ public class Kekoilua {
         long fiboAika = testaaInsert(fibo, tuhat);
         System.out.println("1000         " + binaAika + "ms           "
                 + binoAika + "ms             " + fiboAika + "ms");
+        
+        //otetaan gettiajat talteen:
+        long gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 1000; i++) {
+            binaari.getYlin();
+        }
+        long gEndTime = System.currentTimeMillis();
+        long gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 1000; i++) {
+            binomi.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 1000; i++) {
+            fibo.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+        
+        //otetaan deleteajat talteen
+        long dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 1000; i++) {
+            binaari.pop();
+        }
+        long endTime = System.currentTimeMillis();
+        long poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 1000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 1000; i++) {
+       //     fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
-        
         binaAika = testaaInsert(binaari, ktuh);
         binoAika = testaaInsert(binomi, ktuh);
         fiboAika = testaaInsert(fibo, ktuh);
         System.out.println("10000        " + binaAika + "ms          "
                 + binoAika + "ms            " + fiboAika + "ms");
         
-        ArrayList<Integer> popatut = new ArrayList<>();
-        Collections.sort(ktuh);
+        //otetaan gettiajat talteen:
+        gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 10000; i++) {
+            binaari.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
         
-        long startTime = System.currentTimeMillis();
-        for(int i = 0; i < 10000; i++){
-            popatut.add(binomi.pop());
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 10000; i++) {
+            binomi.getYlin();
         }
-        long endTime = System.currentTimeMillis();
-        System.out.println(popatut.get(0));
-        System.out.println(ktuh.get(0));
-        long ktuhatpoistoAika = endTime - startTime;
-        if(popatut.equals(ktuh)){
-            System.out.println("poppaus toimii");
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 10000; i++) {
+            fibo.getYlin();
         }
-        System.out.println(popatut.size());
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+
+        //otetaan deleteajat talteen
+        dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 10000; i++) {
+            binaari.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 10000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 10000; i++) {
+        //    fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
@@ -161,39 +295,241 @@ public class Kekoilua {
         System.out.println("100000       " + binaAika + "ms           "
                 + binoAika + "ms            " + fiboAika + "ms");
         
+        //otetaan gettiajat talteen:
+        gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 100000; i++) {
+            binaari.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 100000; i++) {
+            binomi.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 100000; i++) {
+            fibo.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+
+        //otetaan deleteajat talteen
+        dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 100000; i++) {
+            binaari.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 100000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 100000; i++) {
+          //  fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
         binaAika = testaaInsert(binaari, kaksistuh);
         binoAika = testaaInsert(binomi, kaksistuh);
         fiboAika = testaaInsert(fibo, kaksistuh);
-        System.out.println("200000       " + binaAika + "ms           "
+        System.out.println("200000       " + binaAika + "ms          "
                 + binoAika + "ms            " + fiboAika + "ms");
+        
+        //otetaan gettiajat talteen:
+        gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 20000; i++) {
+            binaari.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 20000; i++) {
+            binomi.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 20000; i++) {
+            fibo.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+
+        //otetaan deleteajat talteen
+        dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 20000; i++) {
+            binaari.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 20000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 20000; i++) {
+            //fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
         binaAika = testaaInsert(binaari, milli);
         binoAika = testaaInsert(binomi, milli);
         fiboAika = testaaInsert(fibo, milli);
-        System.out.println("1000000      " + binaAika + "ms          "
+        System.out.println("1000000      " + binaAika + "ms         "
                 + binoAika + "ms           " + fiboAika + "ms");
+        
+        //otetaan gettiajat talteen:
+        gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 1000000; i++) {
+            binaari.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 1000000; i++) {
+            binomi.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 1000000; i++) {
+            fibo.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+
+        //otetaan deleteajat talteen
+        dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 1000000; i++) {
+            binaari.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 1000000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 1000000; i++) {
+          //  fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
         binaari = new Binaarikeko();
         binomi = new Binomikeko();
         fibo = new Fibonaccikeko();
         binaAika = testaaInsert(binaari, viisimilli);
         binoAika = testaaInsert(binomi, viisimilli);
         fiboAika = testaaInsert(fibo, viisimilli);
-        System.out.println("5000000       " + binaAika + "ms           "
-                + binoAika + "ms            " + fiboAika + "ms");
+        System.out.println("5000000      " + binaAika + "ms        "
+                + binoAika + "ms          " + fiboAika + "ms");
         
-        binaari = new Binaarikeko();
-        binomi = new Binomikeko();
-        fibo = new Fibonaccikeko();
-        binaAika = testaaInsert(binaari, kty);
-        binoAika = testaaInsert(binomi, kty);
-        fiboAika = testaaInsert(fibo, kty);
-        System.out.println("10001       " + binaAika + "ms           "
-                + binoAika + "ms            " + fiboAika + "ms");
+        //otetaan gettiajat talteen:
+        gStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 5000000; i++) {
+            binaari.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 5000000; i++) {
+            binomi.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        
+        gStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 5000000; i++) {
+            fibo.getYlin();
+        }
+        gEndTime = System.currentTimeMillis();
+        gPoistoAika = gEndTime - gStartTime;
+        gettiAjat.add(gPoistoAika);
+        //
+
+        //otetaan deleteajat talteen
+        dStartTime = System.currentTimeMillis(); //binääri
+        for (int i = 0; i < 5000000; i++) {
+            binaari.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //binomi
+        for (int i = 0; i < 5000000; i++) {
+            binomi.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+
+        dStartTime = System.currentTimeMillis(); //fibonacci
+        for (int i = 0; i < 5000000; i++) {
+            //fibo.pop();
+        }
+        endTime = System.currentTimeMillis();
+        poistoAika = endTime - dStartTime;
+        poistoAjat.add(poistoAika);
+        //
+
     }
 
     public static long testaaInsert(Keko keko, ArrayList<Integer> a) {
@@ -202,7 +538,7 @@ public class Kekoilua {
             keko.insert(a.get(i));
         }
         long timenow = System.currentTimeMillis();
-        long tulos = timenow- startTime;
+        long tulos = timenow - startTime;
         return tulos;
     }
 
