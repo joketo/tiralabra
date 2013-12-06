@@ -50,17 +50,17 @@ public class FibonaccikekoTest {
     public void testDeleteRandomKeolla(){
         ArrayList<Integer> a = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             a.add(rand.nextInt());
         }
         Random r = new Random();
         for(int i = 0; i < a.size(); i++){
             keko.Insert(a.get(i));
         }
-        keko.Delete();
+        int kPienin = keko.Delete();
         Collections.sort(a);
-        int pienin = a.get(1);
-        assertEquals(pienin, keko.getYlin());
+        int aPienin = a.get(0);
+        assertEquals(aPienin, kPienin);
     }
     
     @Test
