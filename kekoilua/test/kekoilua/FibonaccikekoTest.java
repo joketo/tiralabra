@@ -50,7 +50,7 @@ public class FibonaccikekoTest {
     public void testDeleteRandomKeolla(){
         ArrayList<Integer> a = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             a.add(rand.nextInt());
         }
         Random r = new Random();

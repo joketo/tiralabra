@@ -203,26 +203,26 @@ public class Kekoilua {
         System.out.println("\nDELETE");
         startTime = System.currentTimeMillis();
         System.out.println("poistetaan keoista ylin alkio");
-        binaarikeko.Delete();
+        System.out.println(binaarikeko.Delete());
         timenow = System.currentTimeMillis();
         System.out.println("Binäärikeko: ");
         System.out.println(ANSI_RED + (timenow - startTime) + " millisekuntia" + CLOSE);
 
         startTime = System.currentTimeMillis();
-        binomikeko.Delete();
+        System.out.println(binomikeko.Delete());
         timenow = System.currentTimeMillis();
         System.out.println("Binomikeko:");
         System.out.println(ANSI_GREEN + (timenow - startTime) + " millisekuntia" + CLOSE);
 
         System.out.println("Koska fibonaccikeon poiston kesto vaihtelee, poistetaan näytöksi useampi alkio:");
         startTime = System.currentTimeMillis();
-        fibonaccikeko.Delete();
+        System.out.println(fibonaccikeko.Delete());
         timenow = System.currentTimeMillis();
         System.out.println("Fibonaccikeko 1.poisto:");
         System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia" + CLOSE);
 
         startTime = System.currentTimeMillis();
-        fibonaccikeko.Delete();
+        System.out.println(fibonaccikeko.Delete());
         timenow = System.currentTimeMillis();
         System.out.println("Fibonaccikeko 2.poisto:");
         System.out.println(ANSI_BLUE + (timenow - startTime) + " millisekuntia" + CLOSE);
