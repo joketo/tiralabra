@@ -131,7 +131,8 @@ public class Fibonaccikeko implements Keko {
             x.setVasenSisar(minRoot);
         }
     }
-
+    
+    //tee yystä x:n lapsi
     private void heapLink(FiboNode y, FiboNode x) {
         if (y == null) {
             return;

@@ -22,7 +22,7 @@ public class Kekoilua {
         System.out.println(ANSI_GREEN + "BINOMIKEKO");
         System.out.println(ANSI_BLUE + "FIBONACCIKEKO");
         System.out.println(CLOSE);
-        testaa(9,1);
+        testaa(10,1);
 /*
         if (syote.equals("binomi") || syote.equals("binääri") || syote.equals("fibonacci")) {
             montako = Integer.parseInt(args[1]);
