@@ -19,48 +19,48 @@ public class BinaarikekoTest {
     @Test
     public void InsertToimiiKunKekoOnTyhja() {
         int alkio = 4;
-        keko.Insert(alkio);
+        keko.insert(alkio);
         assertEquals(4, keko.getYlin());
     }
     
     @Test
     public void InsertToimiiKunKekoEiOleTyhja(){
-        keko.Insert(1);
-        keko.Insert(3);
-        keko.Insert(5);
+        keko.insert(1);
+        keko.insert(3);
+        keko.insert(5);
         assertEquals(5, keko.getYlin());
     }
 
     /**
-     * Test of Delete method, of class Binaarikeko.
+     * Test of pop method, of class Binaarikeko.
      */
     @Test
     public void DeleteToimiiKunKekoOnTyhja() {
-        keko.Delete();
+        keko.pop();
         assertEquals(-1, keko.getYlin()); //-1 on tyhjän keon merkki
     }
     
     @Test
     public void DeleteToimiiKunKeossaYksiAlkio(){
-        keko.Insert(1);
-        keko.Delete();
+        keko.insert(1);
+        keko.pop();
         assertEquals(-1, keko.getYlin());
     }
     
     @Test
     public void DeleteToimiiKunKeossaNeljaAlkiota(){
-        keko.Insert(4);
-        keko.Insert(3);
-        keko.Insert(2);
-        keko.Insert(1);
-        keko.Delete();
+        keko.insert(4);
+        keko.insert(3);
+        keko.insert(2);
+        keko.insert(1);
+        keko.pop();
         assertEquals(3, keko.getYlin());
     }
     
     @Test
     public void GetYlinToimii(){
-        keko.Insert(3);
-        keko.Insert(5);
+        keko.insert(3);
+        keko.insert(5);
         assertEquals(5, keko.getYlin());
     }
 }

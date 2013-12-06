@@ -42,7 +42,7 @@ public class Binaarikeko implements Keko{
     }
 
     @Override
-    public void Insert(int alkio) {
+    public void insert(int alkio) {
         keko.add(alkio);
         if(keko.size() == 1){
             return;
@@ -65,7 +65,7 @@ public class Binaarikeko implements Keko{
     }
 
     @Override
-    public int Delete() { //poistaa keon huipun
+    public int pop() { //poistaa keon huipun
         int poistettava = getYlin();
         if(keko.isEmpty()){
             throw new EmptyStackException();

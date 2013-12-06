@@ -78,7 +78,7 @@ public class Binomikeko implements Keko {
     }
 
     @Override
-    public int Delete() {
+    public int pop() {
         return extractMin(); // poistaNode(this.getMinimiNode());
     }
 
@@ -151,7 +151,7 @@ public class Binomikeko implements Keko {
     }
 
     @Override
-    public void Insert(int a) {
+    public void insert(int a) {
         Binomikeko uusikeko = new Binomikeko();
         BinomiNode keonEkapuu = new BinomiNode(a);
         uusikeko.head = keonEkapuu;

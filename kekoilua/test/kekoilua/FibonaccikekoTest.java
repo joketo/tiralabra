@@ -23,16 +23,16 @@ public class FibonaccikekoTest {
     
     
     /**
-     * Test of Delete method, of class Fibonaccikeko.
+     * Test of pop method, of class Fibonaccikeko.
      */
     
     @Test
     public void testDelete() {
-        keko.Insert(2);
-        keko.Insert(1);
-        keko.Insert(3);
+        keko.insert(2);
+        keko.insert(1);
+        keko.insert(3);
         System.out.println(keko.toString());
-        keko.Delete();
+        keko.pop();
         //System.out.println(keko.toString());
         assertEquals(2, keko.getYlin());
     }
@@ -40,12 +40,14 @@ public class FibonaccikekoTest {
     @Test
     public void testDeleteIsollaKeolla(){
         for(int i = 1; i < 101; i++){
-            keko.Insert(i);
+            keko.insert(i);
         }
-        keko.Delete();
+        keko.pop();
         assertEquals(2, keko.getYlin());
     }
-   
+    
+    
+    
     @Test
     public void testDeleteRandomKeolla(){
         ArrayList<Integer> a = new ArrayList<>();
@@ -55,9 +57,9 @@ public class FibonaccikekoTest {
         }
         Random r = new Random();
         for(int i = 0; i < a.size(); i++){
-            keko.Insert(a.get(i));
+            keko.insert(a.get(i));
         }
-        int kPienin = keko.Delete();
+        int kPienin = keko.pop();
         Collections.sort(a);
         int aPienin = a.get(0);
         assertEquals(aPienin, kPienin);
@@ -66,14 +68,14 @@ public class FibonaccikekoTest {
     @Test
     public void testInsert() {
         System.out.println("Insert");
-        keko.Insert(2);
+        keko.insert(2);
         assertEquals(2, keko.getYlin());
     }
 
     @Test
     public void testInsertUseammalla(){
         for(int i = 1; i < 101; i++){
-            keko.Insert(i);
+            keko.insert(i);
         }
      //   System.out.println(keko.toString());
         assertEquals(1, keko.getYlin());
@@ -82,7 +84,7 @@ public class FibonaccikekoTest {
     @Test
     public void testGetYlin() {
         System.out.println("getYlin");
-        keko.Insert(4);
+        keko.insert(4);
         assertEquals(4, keko.getYlin());
     }
 }

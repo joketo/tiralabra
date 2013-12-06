@@ -14,7 +14,7 @@ public class Fibonaccikeko implements Keko {
     }
 
     @Override
-    public int Delete() {
+    public int pop() {
         int pieninArvo = minRoot.getArvo(); //palautusta varten
         if(minRoot == null){
             throw new EmptyStackException();
@@ -154,7 +154,7 @@ public class Fibonaccikeko implements Keko {
     }
 
     @Override
-    public void Insert(int a) {
+    public void insert(int a) {
         FiboNode x = new FiboNode(a);
         x.setAste(0);
         x.setVanhus(null);

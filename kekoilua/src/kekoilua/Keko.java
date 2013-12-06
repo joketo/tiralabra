@@ -3,8 +3,8 @@ package kekoilua;
 
 
 public interface Keko {
-    public int Delete();
-    public void Insert(int a);
+    public int pop();
+    public void insert(int a);
     public int getYlin();
     
 }
