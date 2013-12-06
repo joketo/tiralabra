@@ -78,17 +78,16 @@ public class Fibonaccikeko implements Keko {
 
     private void consolidate() {
         FiboNode[] asteet = alustaAstelista();
-        FiboNode i = this.minRoot;
+        FiboNode x = this.minRoot;
         if (minRoot == null) {
             return;
         }
         FiboNode vika = this.minRoot.getVasenSisar();
-        if (i == null) {
+        if (x == null) {
             return;
         }
         //jokaiselle rootlistin nodelle i
         while (true) {
-            FiboNode x = i;
             int d = x.getAste();
             while (asteet[d] != null) {
                 FiboNode y = asteet[d];
@@ -105,10 +104,10 @@ public class Fibonaccikeko implements Keko {
                 d++;
             }
             asteet[d] = x;
-            if (i == vika) {
+            if (x == vika) {
                 break;
             }
-            i = i.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
+            x = x.getOikeaSisar(); //liikutaan rootlistissa eteenpäin
         }
         this.minRoot = null;
         for (int u = 0; u < asteet.length; u++) {
